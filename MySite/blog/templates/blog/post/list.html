@@ -3,7 +3,7 @@
 {% block title %}My Blog{% endblock %}
 
 {% block content %}
-     <h1>My Blog!! List</h1>
+     <h1>Really need a Blog Title</h1>
 
     {% for post in posts %}
         <h2>
@@ -15,9 +15,9 @@
         </p>
 
         {{ post.body|linebreaks }}
-    {% empty %}
-        <p>There are no similar post yet.</p>
     {% endfor %}
+    
+    {% include "pagination.html" with page=posts %}    
 
 {% endblock %}
 

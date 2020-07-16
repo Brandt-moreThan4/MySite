@@ -1,9 +1,72 @@
-<html>
-<head><title></title></head>
+{% extends "blog/base.html" %}
 
-<body>
+{% block title %}Home{% endblock %}
 
-{{ content }}
 
-</body>
-</html>
+{% comment %}
+<head>
+    <style>
+
+        .img-container {
+            width:250px;
+            height:300px;
+        }
+
+    </style>
+</head>
+{% endcomment %}
+
+{% block content %}
+
+    {% comment %}
+    <div class="alert alert-info" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            X
+        </button>
+        This website is currently under early development. Please don't judge it for typos or for being ugly.
+    </div>
+    {% endcomment %}
+
+
+    <h1 class="text-center">Welcome </h1>
+    <br />
+
+
+    <div class="row">
+        <div class="col-lg-10">
+
+            {#<div class="float-right">#}
+                    {#<img class="rounded img-fluid img-container" src="/Images/lsuGraduation.jpg" />#}
+            {#</div>#}
+            <p> My purpose in creating this website was threefold: </p>
+
+            <p>
+                First, I wanted some sort of motivating project to work on that would allow me to improve my C# coding skills.
+                Unfortunately, the C# necessary for building this website so far has been minimal and basic, but luckily the
+                website has given me a wide variety of other beautiful and complicated problems to solve. I have had to learn
+                HTML, CSS, Bootstrap, JavaScript, Razor Pages, database creation, and probably more stuff I cant think of.
+                Really fascinating stuff and I am extremely satisfied with the path I ended up going through.
+            </p>
+            <p>
+                Second, I have a deep desire to hone my writing skills because I'm really not impressed with my current output.
+                I figured making a blog is one of the best ways to do that because putting content out there for the world to see is
+                a powerful motivator to create the quality material. Please, heavily critique both writing style/ grammar and the
+                actual content anywhere on this website.
+            </p>
+            <p>
+                Third, I thought it would be fun to have an easily accessible place to store and share things that I care about.
+                That's how the Book and Knowledge-Repo pages came to be. The book page will give me the ability to keep track of my
+                reading while providing reviews and commentary to future self and others. The Knowledge repository is intended to
+                just be a storehouse for any sources of information that are useful or cool. At some point after it's large enough
+                I would like to organize it into broad categories with the ability to drill down further at your pleasure.
+            </p>
+
+            <p>
+                Update: Honestly I may be converting this whole website to Django and just redo everything to make it better. 
+                This was fun, but the call of Python is strong so I may have to make the switch.
+            </p>
+        </div>
+
+    </div>
+
+{% endblock %}

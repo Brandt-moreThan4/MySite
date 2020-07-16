@@ -113,3 +113,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+
+"""Below needed for sending emails"""
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'brandtgreen97@gmail.com'
+EMAIL_HOST_PASSWORD = '35aJIahI'
+EMAIL_USE_TLS = True
+#send_mail('django mail', 'Sen with django', '153144green@chsbr.net', ['153144green@chsbr.net'], fail_silently=False)
