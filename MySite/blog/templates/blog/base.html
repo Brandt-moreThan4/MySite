@@ -1,0 +1,27 @@
+﻿{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}" />
+</head>
+
+<body>
+    <div id="content">
+        {% block content %}
+        {% endblock%}
+    </div>
+
+    <div id="sidebar">
+        <h5>Link to admin page: <a href="/admin">Admin Link</a></h5>
+        <br />
+        <h2><a href="/">My Blog on the sidebar</a></h2>
+
+        <p>This right here is my blog.</p>
+        {#<p> I have written {% total_posts %} posts so far!!</p>#}
+    </div>
+
+</body>
+</html>

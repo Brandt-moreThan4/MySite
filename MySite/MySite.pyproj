@@ -34,6 +34,9 @@
     <Compile Include="blog\apps.py" />
     <Compile Include="blog\migrations\__init__.py" />
     <Compile Include="blog\models.py" />
+    <Compile Include="blog\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="blog\views.py" />
     <Compile Include="blog\__init__.py" />
     <Compile Include="manage.py" />
@@ -43,14 +46,21 @@
     <Compile Include="MySite\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="blog\static\css\blog.css" />
+    <Content Include="blog\templates\blog\base.html" />
     <Content Include="blog\templates\blog\index.html" />
+    <Content Include="blog\templates\blog\post\detail.html" />
+    <Content Include="blog\templates\blog\post\list.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="blog\" />
     <Folder Include="blog\migrations\" />
+    <Folder Include="blog\static\" />
+    <Folder Include="blog\static\css\" />
     <Folder Include="blog\templates\" />
     <Folder Include="blog\templates\blog\" />
+    <Folder Include="blog\templates\blog\post\" />
     <Folder Include="MySite\" />
   </ItemGroup>
   <ItemGroup>
