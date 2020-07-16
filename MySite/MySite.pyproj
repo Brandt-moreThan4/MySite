@@ -49,6 +49,19 @@
     <Compile Include="MySite\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="blog\static\css\bootstrap-grid.css" />
+    <Content Include="blog\static\css\bootstrap-grid.css.map" />
+    <Content Include="blog\static\css\bootstrap-grid.min.css" />
+    <Content Include="blog\static\css\bootstrap-grid.min.css.map" />
+    <Content Include="blog\static\css\bootstrap-reboot.css" />
+    <Content Include="blog\static\css\bootstrap-reboot.css.map" />
+    <Content Include="blog\static\css\bootstrap-reboot.min.css" />
+    <Content Include="blog\static\css\bootstrap-reboot.min.css.map" />
+    <Content Include="blog\static\css\bootstrap.css" />
+    <Content Include="blog\static\css\bootstrap.css.map" />
+    <Content Include="blog\static\css\bootstrap.min.css" />
+    <Content Include="blog\static\css\bootstrap.min.css.map" />
+    <Content Include="blog\static\css\site.css" />
     <Content Include="blog\static\Images\BlackHole.jpg" />
     <Content Include="blog\static\Images\BlogPics\FREDCorporateProfits.PNG" />
     <Content Include="blog\static\Images\Books\50EconomicsClassics.jpg" />
@@ -162,8 +175,17 @@
     <Content Include="blog\static\Images\LanguageLogos\VBA.png" />
     <Content Include="blog\static\Images\lsuGraduation.jpg" />
     <Content Include="blog\static\css\blog.css" />
+    <Content Include="blog\static\js\bootstrap.bundle.js" />
+    <Content Include="blog\static\js\bootstrap.bundle.js.map" />
+    <Content Include="blog\static\js\bootstrap.bundle.min.js" />
+    <Content Include="blog\static\js\bootstrap.bundle.min.js.map" />
+    <Content Include="blog\static\js\bootstrap.js" />
+    <Content Include="blog\static\js\bootstrap.js.map" />
+    <Content Include="blog\static\js\bootstrap.min.js" />
+    <Content Include="blog\static\js\bootstrap.min.js.map" />
     <Content Include="blog\templates\blog\base.html" />
     <Content Include="blog\templates\blog\index.html" />
+    <Content Include="blog\templates\blog\base2.html" />
     <Content Include="blog\templates\blog\post\detail.html" />
     <Content Include="blog\templates\blog\post\list.html" />
     <Content Include="blog\templates\blog\post\share.html" />
@@ -179,6 +201,7 @@
     <Folder Include="blog\static\" />
     <Folder Include="blog\static\css\" />
     <Folder Include="blog\static\Images\" />
+    <Folder Include="blog\static\js\" />
     <Folder Include="blog\templates\" />
     <Folder Include="blog\templates\blog\" />
     <Folder Include="blog\templates\blog\post\" />

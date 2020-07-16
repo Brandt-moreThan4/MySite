@@ -4,24 +4,65 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}" />
+    {#<link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}" />#}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+
+    <style> /*Should probably just input this input blog.css file*/
+        header {
+            background-color: rgb(179, 224, 255);
+        }
+    </style>
 </head>
 
 <body>
-    <div id="content">
-        {% block content %}
-        {% endblock%}
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1 navbar-right justify-content-end">
+                        <li class="nav-item"
+                            ><a lass="nav-link" style="color:black" href="/">Home</a>
+                        </li>
+                        <li class="nav-item"
+                            ><a lass="nav-link" style="color:black" href="blog/">Blog</a>
+                        </li>
+                        <li class="nav-item"
+                            ><a lass="nav-link" style="color:black" href="admin/">Admin</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container body-content">
+        <main class="pb-3">
+            {% block content %}{% endblock %}
+        </main>
+        <hr/>
+        
     </div>
 
-    <div id="sidebar">
-        <h5>Link to admin page: <a href="/admin">Admin Link</a></h5>
-        <br />
-        <h2><a href="/blog">My Blog</a></h2>
 
-        <p>This right here is my blog.</p>
-        {#<p> I have written {% total_posts %} posts so far!!</p>#}
-    </div>
+    <footer class="border-top footer">
+        <div class="container">
+            &copy; 2020 - FunWithBrandt
+        </div>
+    </footer>
 
+    {% comment %}
+    {% endcomment %}
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    {% block scripts %}{% endblock %} {# This allows for other scripts on extended pages#}
 </body>
 </html>
