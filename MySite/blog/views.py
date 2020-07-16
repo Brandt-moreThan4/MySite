@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
-#from .forms import EmailPostForm, CommentForm
+from .forms import EmailPostForm #, CommentForm
 from django.core.mail import send_mail
 #from taggit.models import Tag
 from django.db.models import Count
@@ -62,12 +62,12 @@ def post_share(request, post_id):
     if request.method =='POST':
         form = EmailPostForm(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
+            form_data = form.cleaned_data
             post_url = request.build_absolute_uri(
                 post.get_absolute_url())
-            subject = f"Yo. {cd['name']} thinks you should read {post.title}"
-            message = f"Read that shit at {post_url}"
-            send_mail(subject, message, '153144green@chsbr.net', [cd['to']])
+            subject = f"Yo. {form_data['name']} thinks you should read this post: {post.title}"
+            message = f"Read that shit at {post_url} \n\n My comments: {form_data['comments']}" # I have not tested after adding this line yet
+            send_mail(subject, message, 'brandtgreen97@gmail.com', [form_data['to']])
             sent = True
     else:
         form = EmailPostForm()

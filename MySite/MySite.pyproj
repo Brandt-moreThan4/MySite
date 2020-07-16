@@ -166,6 +166,7 @@
     <Content Include="blog\templates\blog\index.html" />
     <Content Include="blog\templates\blog\post\detail.html" />
     <Content Include="blog\templates\blog\post\list.html" />
+    <Content Include="blog\templates\blog\post\share.html" />
     <Content Include="blog\templates\pagination.html" />
     <Content Include="requirements.txt" />
   </ItemGroup>
