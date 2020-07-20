@@ -1,0 +1,37 @@
+﻿{% extends "blog/base.html" %}
+
+{% block title %}Books{% endblock %}
+
+{% block content %}
+     <h1>Books</h1>
+     <br />
+
+
+    <p>
+        This page is coming soon. It's a big project and I'll be modeling it off of
+        <a href="https://www.gatesnotes.com/Books">Bill Gates' blog</a>
+        because I think his looks pretty cool. Unfortunately, loading all of the images on this page
+        is what makes the whole website take about 5 seconds to load when your first navigate to it.
+        So I need to figure out how to fix that.
+    </p>
+    <br />
+
+        {#{% for row in rows_needed %}#}   
+         <div class="row">
+             
+        {% for book in books %}         
+            {#<div class="row">#}
+                <div class="col-lg-3 col-sm-6">
+                    <a href="/">
+                        <img src="../../../static/Images/Books/{{ book.image_name }}"/>
+                    </a>
+                </div>
+            {#</div>#}
+
+            
+
+        {% endfor %}   
+        </div>
+                
+
+{% endblock %}

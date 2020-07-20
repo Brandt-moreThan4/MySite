@@ -72,6 +72,7 @@ body {
 
 
 
-#mainContent {
-    /*margin: 20px;*/
+.img-container {
+    width: 250px;
+    height: 300px;
 }

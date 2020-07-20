@@ -35,3 +35,15 @@ class Post(models.Model):
                              self.created.month,
                              self.created.day,
                              self.slug])
+
+
+class Book(models.Model):
+    """Class to model book data"""
+    book_title = models.CharField(max_length=300)
+    slug = models.SlugField(max_length=250, unique_for_date='created') 
+    author = models.CharField(max_length=300)
+    cover_description = models.TextField()
+    body = models.TextField()
+    image_name = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)

@@ -1,17 +1,19 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Post, Book
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from .forms import EmailPostForm #, CommentForm
 from django.core.mail import send_mail
 #from taggit.models import Tag
 from django.db.models import Count
-
+import math
 
 
 
 def home(request):
-    """Renders the home page. Should this be on the project level?"""
+    """Renders the home page. """
+
+
     return render(request,'blog/index.html')
 
 
@@ -75,3 +77,12 @@ def post_share(request, post_id):
     return render(request, 'blog/post/share.html', {'post': post, 'form': form, 'sent': sent})
 
 
+
+
+"""Below is for books"""
+def book_list(request):
+    """Renders the generic book list view"""
+    books = Book.objects.all()    
+
+    #rows_needed = math.ceil(books.count()/4) # I want each boostrap row to have 4 books on it.
+    return render(request, 'blog/book/list.html', {'books': books})

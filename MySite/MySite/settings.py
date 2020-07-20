@@ -121,4 +121,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'brandtgreen97@gmail.com'
 EMAIL_HOST_PASSWORD = '35aJIahI'
 EMAIL_USE_TLS = True
-#send_mail('django mail', 'Sen with django', '153144green@chsbr.net', ['153144green@chsbr.net'], fail_silently=False)

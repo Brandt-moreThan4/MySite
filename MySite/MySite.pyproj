@@ -183,9 +183,10 @@
     <Content Include="blog\static\js\bootstrap.js.map" />
     <Content Include="blog\static\js\bootstrap.min.js" />
     <Content Include="blog\static\js\bootstrap.min.js.map" />
+    <Content Include="blog\static\websiteDB.xlsx" />
     <Content Include="blog\templates\blog\base.html" />
+    <Content Include="blog\templates\blog\book\list.html" />
     <Content Include="blog\templates\blog\index.html" />
-    <Content Include="blog\templates\blog\base2.html" />
     <Content Include="blog\templates\blog\post\detail.html" />
     <Content Include="blog\templates\blog\post\list.html" />
     <Content Include="blog\templates\blog\post\share.html" />
@@ -204,6 +205,7 @@
     <Folder Include="blog\static\js\" />
     <Folder Include="blog\templates\" />
     <Folder Include="blog\templates\blog\" />
+    <Folder Include="blog\templates\blog\book\" />
     <Folder Include="blog\templates\blog\post\" />
     <Folder Include="MySite\" />
   </ItemGroup>
