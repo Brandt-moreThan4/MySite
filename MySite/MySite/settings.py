@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.blogConfig',
-    #'taggit',
+    'taggit',
 ]
 
 # Middleware framework

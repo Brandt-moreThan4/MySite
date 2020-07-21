@@ -189,6 +189,7 @@
     <Content Include="blog\static\websiteDB.xlsx" />
     <Content Include="blog\templates\blog\base.html" />
     <Content Include="blog\templates\blog\book\list.html" />
+    <Content Include="blog\templates\blog\data_import.html" />
     <Content Include="blog\templates\blog\index.html" />
     <Content Include="blog\templates\blog\post\detail.html" />
     <Content Include="blog\templates\blog\post\list.html" />

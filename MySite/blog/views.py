@@ -1,12 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Book
+from .models import Post, Book, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
-from .forms import EmailPostForm #, CommentForm
+from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
-#from taggit.models import Tag
+from taggit.models import Tag
 from django.db.models import Count
-import math
 
 
 
@@ -21,12 +20,11 @@ def post_list(request, tag_slug=None):
     """Displays the posts."""
 
     object_list = Post.objects.all()
+    tag = None
 
-    #tag = None
-
-    #if tag_slug:
-    #    tag = get_object_or_404(Tag, slug=tag_slug)
-    #    object_list = object_list.filter(tags__in=[tag])
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
 
     paginator = Paginator(object_list, 3) # 3 posts per page
     page = request.GET.get('page') #what is this doing?
@@ -39,21 +37,44 @@ def post_list(request, tag_slug=None):
         # If the page is out of range deliver the last page of results.
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'blog/post/list.html', {'page': page,'posts': posts})
-    #return render(request, 'blog/post/list.html', {'page': page,'posts': posts, 'tag': tag})
+    return render(request, 'blog/post/list.html', {'page': page,'posts': posts, 'tag': tag})
 
 
 def post_detail(request, year, month, day, post):
     """Single Post"""
 
+    # Below method raises an exception if the post is not found based on the url inputs provided.
     post = get_object_or_404(Post, slug=post,                                  
                                    created__year=year, 
                                    created__month=month,
                                    created__day=day)
 
+    # List of active comments for this post
+    comments = post.comments.filter(active=True) # Would this not be executed until it is called in the view template?
+    new_comment = None
+
+    if request.method == 'POST':
+        # A comment was posted
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create comment object but don't commit it to the database yet so you can link it to the post
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post = post
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+
+    #post_tags_ids = post.tags.values_list('id', flat=True)
+    #similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    #similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-publish')[:4]
 
     return render(request, 'blog/post/detail.html',
-                 {'post': post,})
+                 {'post': post,
+                 'comments': comments,
+                 'new_comment': new_comment,
+                 'comment_form': comment_form})
 
 
 def post_share(request, post_id):
@@ -79,9 +100,33 @@ def post_share(request, post_id):
 
 
 
-"""Below is for books"""
+
+
+
+
+
 def book_list(request):
     """Renders the generic book list view"""
     books = Book.objects.all()    
 
     return render(request, 'blog/book/list.html', {'books': books})
+
+
+def book_detail(request):
+    pass
+
+
+def knowledge_repo(request):
+    """Produces the beautiful table of learning"""
+    return render(request, 'knowledge_repo.html', {'knowledge_list': knowledge_list})
+
+
+def data_import(request):
+    """lolol"""
+    try:
+        input_value = request.GET['texty']
+    except:
+        return render(request, 'blog/data_import.html')
+    else:
+        return render(request, 'blog/data_import.html')
+
