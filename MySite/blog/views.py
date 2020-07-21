@@ -84,5 +84,4 @@ def book_list(request):
     """Renders the generic book list view"""
     books = Book.objects.all()    
 
-    #rows_needed = math.ceil(books.count()/4) # I want each boostrap row to have 4 books on it.
     return render(request, 'blog/book/list.html', {'books': books})

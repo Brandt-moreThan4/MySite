@@ -16,21 +16,14 @@
     </p>
     <br />
 
-        {#{% for row in rows_needed %}#}   
          <div class="row">
-             
-        {% for book in books %}         
-            {#<div class="row">#}
+            {% for book in books %}         
                 <div class="col-lg-3 col-sm-6">
                     <a href="/">
                         <img src="../../../static/Images/Books/{{ book.image_name }}"/>
                     </a>
                 </div>
-            {#</div>#}
-
-            
-
-        {% endfor %}   
+            {% endfor %}   
         </div>
                 
 
