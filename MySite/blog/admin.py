@@ -32,7 +32,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Knowledge)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('author', 'slug')
+    list_display = ('author', 'description')
     list_filter = ('created',)
     search_fields = ('tags', 'description', 'author')
     prepopulated_fields = {'slug': ('author',)}

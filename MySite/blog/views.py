@@ -114,17 +114,26 @@ def book_detail(request):
 def knowledge_repo(request):
     """Produces the beautiful table of learning"""
 
-    knowledge_list = Knowledge.objects.all()
 
+
+    knowledge_list = Knowledge.objects.all()
+    
     return render(request, 'blog/knowledge_repo.html', {'knowledge_list': knowledge_list})
 
 
 def data_import(request):
     """lolol"""
-    try:
-        input_value = request.GET['texty']
-    except:
-        return render(request, 'blog/data_import.html')
-    else:
-        return render(request, 'blog/data_import.html')
+    
+    #if request.method == 'POST':
+    #    file = request.FILES['filey_name']
+    #    for line in open(file):
+    #        print(line)    
+    #    print('lol')
+    #try:
+    #    input_value = request.GET['texty']
+    #except:
+    #    return render(request, 'blog/data_import.html')
+    #else:
+    #    return render(request, 'blog/data_import.html')
+    return render(request, 'blog/data_import.html')
 

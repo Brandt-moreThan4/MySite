@@ -8,13 +8,12 @@
     <br />
            
 
-    <form method="get">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <fieldset>
-            <div>
-                <input type="text" name="texty" />
-            </div>
 
             <input type="file" id="myfile" name="filey_name" />
+            <br />
             <input type="submit" value="Let's Fucking Do it!!!" />
         </fieldset>
 

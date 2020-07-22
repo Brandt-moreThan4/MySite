@@ -1,5 +1,5 @@
 ﻿{% extends "blog/base.html" %}
-
+{% load static %}
 {% block title %}Books{% endblock %}
 
 {% block content %}
@@ -20,7 +20,11 @@
             {% for book in books %}         
                 <div class="col-lg-3 col-sm-6">
                     <a href="/">
-                        <img src="../../../static/Images/Books/{{ book.image_name }}"/>
+                        <img src=
+                             "{% with 'blog/Images/Books/'|add:book.image_name as image_static %}
+                                    {% static image_static %}
+                              {% endwith %}" />
+                             
                     </a>
                 </div>
             {% endfor %}   
