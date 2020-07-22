@@ -16,8 +16,6 @@ class Post(models.Model):
     body = models.TextField()
     created = models.DateTimeField(default=timezone.now())
     updated = models.DateField(auto_now=True)
-
-
     tags = TaggableManager()
         
     class Meta:
@@ -65,5 +63,17 @@ class Book(models.Model):
     cover_description = models.TextField()
     body = models.TextField()
     image_name = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+
+class Knowledge(models.Model):
+    """Class to model a knowledge record"""
+
+    slug = models.SlugField(max_length=250, unique_for_date='created') 
+    author = models.CharField(max_length=500)
+    description = models.TextField()
+    source = models.TextField()
+    tags = TaggableManager()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateField(auto_now=True)

@@ -208,6 +208,7 @@
     <Folder Include="blog\static\css\" />
     <Folder Include="blog\static\Images\" />
     <Folder Include="blog\static\js\" />
+    <Folder Include="blog\static\blog\" />
     <Folder Include="blog\templates\" />
     <Folder Include="blog\templates\blog\" />
     <Folder Include="blog\templates\blog\book\" />

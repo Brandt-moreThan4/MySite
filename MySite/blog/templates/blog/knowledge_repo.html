@@ -1,1 +1,49 @@
-﻿
+﻿{% extends "blog/base.html" %}
+
+{% block title %}KnowledgeRepo{% endblock %}
+
+
+{% block content %}
+
+    <h2>Knowledge Repository</h2>
+    <br />
+    <p>
+        My beautiful table of learning. I would love additional entries so hit me up with other sources.
+        This needs heavy refining. At the very least I need much better descriptions. Also might want to have a better filter option. Something
+        that could outline a specific learning path for differnet topics?
+    </p>
+
+    <form method="get">
+        <div class="form-group">
+            <div class="input-group">
+                <input id="searchBox" type="search" class="search"/>
+                <button class="btn btn-secondary btn-sm">
+                    <span class="glypicon glyphicon-search"></span>Search
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-responsive table-striped table-bordered table-hover table-sm">
+
+        <thead>
+            <tr>
+                <th>Person/Institution</th>
+                <th>Description</th>
+                <th>Keywords</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for knowledge in knowledge_list %}
+                <tr>
+                    <td>{{ knowledge.author }}</td>
+                    <td><a href="{{ knowledge.source }}">{{ knowledge.description }}</a></td>
+                    <td>{{ knowledge.tags.all|join:", " }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% endblock %}

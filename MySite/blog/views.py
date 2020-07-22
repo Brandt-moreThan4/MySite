@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Book, Comment
+from .models import Post, Book, Comment, Knowledge
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from .forms import EmailPostForm, CommentForm
@@ -99,14 +99,9 @@ def post_share(request, post_id):
 
 
 
-
-
-
-
-
-
 def book_list(request):
     """Renders the generic book list view"""
+
     books = Book.objects.all()    
 
     return render(request, 'blog/book/list.html', {'books': books})
@@ -118,7 +113,10 @@ def book_detail(request):
 
 def knowledge_repo(request):
     """Produces the beautiful table of learning"""
-    return render(request, 'knowledge_repo.html', {'knowledge_list': knowledge_list})
+
+    knowledge_list = Knowledge.objects.all()
+
+    return render(request, 'blog/knowledge_repo.html', {'knowledge_list': knowledge_list})
 
 
 def data_import(request):

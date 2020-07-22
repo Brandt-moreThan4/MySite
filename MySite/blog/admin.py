@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Book , Comment
+from .models import Post, Book , Comment, Knowledge
 
 
 @admin.register(Post)
@@ -26,5 +26,15 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('created',)
     search_fields = ('book_title', 'body', 'author')
     prepopulated_fields = {'slug': ('book_title',)}
+    date_hierarchy = 'created'
+    ordering = ('updated', 'created')
+
+
+@admin.register(Knowledge)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('author', 'slug')
+    list_filter = ('created',)
+    search_fields = ('tags', 'description', 'author')
+    prepopulated_fields = {'slug': ('author',)}
     date_hierarchy = 'created'
     ordering = ('updated', 'created')

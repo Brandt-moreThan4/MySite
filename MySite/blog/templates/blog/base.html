@@ -9,7 +9,7 @@
     {#<link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}" />#}
     <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
-    <link rel="icon" href="../../static/Images/BlackHole.jpg" />
+    <link rel="icon" href="{% static 'Images/BlackHole.jpg' %}" />
 
     <style> /*Should probably just input this input blog.css file*/
         header {
@@ -41,7 +41,7 @@
                             ><a lass="nav-link" style="color:black" href="/books/">Books</a>
                         </li>
                         <li class="nav-item"
-                            ><a lass="nav-link" style="color:black" href="/blog/">Knowledge-Repository</a>
+                            ><a lass="nav-link" style="color:black" href="/knowledge-repo/">Knowledge-Repository</a>
                         </li>
                          <li class="nav-item"
                             ><a lass="nav-link" style="color:black" href="/data/">Data-Import</a>
