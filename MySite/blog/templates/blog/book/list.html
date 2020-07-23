@@ -4,7 +4,7 @@
 
 {% block content %}
      <h1>Books</h1>
-     <br />
+     <br /><br />
 
 
     <p>
@@ -18,17 +18,19 @@
 
          <div class="row">
             {% for book in books %}         
-                <div class="col-lg-3 col-sm-6">
+                <div class="book-container col-lg-3 col-sm-6">
                     <a href="/">
-                        <img src=
+                        <img class="book-image" src=
                              "{% with 'blog/Images/Books/'|add:book.image_name as image_static %}
                                     {% static image_static %}
-                              {% endwith %}" />
-                             
+                              {% endwith %}" />                             
                     </a>
+                    <div class="cover-description">
+                        {{ book.cover_description }} 
+                    </div>
                 </div>
             {% endfor %}   
         </div>
-                
+         
 
 {% endblock %}

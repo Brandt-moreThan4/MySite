@@ -6,22 +6,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>{% block title %}{% endblock %}</title>
-    {#<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />#}
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/site.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/site.css' %}" />
+    {% block styles %}{% endblock %}
+
     <link rel="icon" href="{% static 'blog/Images/BlackHole.jpg' %}" />
 
-    <style> /*Should probably just input this input blog.css file*/
-        header {
-            background-color: rgb(179, 224, 255);
-        }
-
-    </style>
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+        {#<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">#}
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3">
 
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -31,23 +28,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1 navbar-right justify-content-end">
                         <li class="nav-item"
-                            ><a lass="nav-link" style="color:black" href="{% url 'blog:blog-home' %}">Home</a>
+                            ><a class="nav-link" href="{% url 'blog:blog-home' %}">Home</a>
                         </li>
                         <li class="nav-item"
-                            ><a lass="nav-link" style="color:black" href="{% url 'blog:post_list' %}">Blog</a>
+                            ><a class="nav-link" href="{% url 'blog:post_list' %}">Blog</a>
                         </li>
 
                         <li class="nav-item"
-                            ><a lass="nav-link" style="color:black" href="/books/">Books</a>
+                            ><a class="nav-link" href="/books/">Books</a>
                         </li>
                         <li class="nav-item"
-                            ><a lass="nav-link" style="color:black" href="/knowledge-repo/">Knowledge-Repository</a>
+                            ><a class="nav-link" href="/knowledge-repo/">Knowledge-Repository</a>
                         </li>
                          <li class="nav-item"
-                            ><a lass="nav-link" style="color:black" href="/data/">Data-Import</a>
+                            ><a class="nav-link" href="/data/">Data-Import</a>
                         </li>
                         <li class="nav-item"
-                            ><a lass="nav-link" style="color:black" href="/admin/">Admin</a>
+                            ><a class="nav-link" href="/admin/">Admin</a>
                         </li>
                     </ul>
                 </div>
@@ -70,13 +67,9 @@
         </div>
     </footer>
 
-    {% comment %}
-    {% endcomment %}
 
     <script src="{% static "blog/js/jquery/jquery.min.js" %}"></script>  {#must come before the below script#}
     <script type="text/javascript" src="{% static "blog/js/bootstrap/bootstrap.bundle.min.js" %}"></script>
-
-
 
     {% block scripts %}{% endblock %} {# This allows for other scripts on extended pages#}
 

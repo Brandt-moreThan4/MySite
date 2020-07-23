@@ -1,5 +1,13 @@
+header {
+    background-color: rgb(179, 224, 255);
+}
+
+.nav-link {
+    color: black; /*What would be a better color?*/
+}
 
 /*Blog post date*/
+
 p.date {
     color: #ccc;
     font-family: georgia, serif;
@@ -7,57 +15,76 @@ p.date {
     font-style: italic;
 }
 
-/* pagination */
 .pagination {
-    margin: 40px 0;
+    margin: 25px 0;
     font-weight: bold;
 }
 
-/* forms */
-label {
-    float: left;
-    clear: both;
-    color: #333;
-    margin-bottom: 4px;
+
+
+
+/*I need minimum width sizing for table???*/
+.table-hover tbody tr:hover {
+    background-color: rgb(179, 224, 255);
 }
 
-input, textarea {
-    clear: both;
-    float: left;
-    margin: 0 0 10px;
-    background: #ededed;
-    border: 0;
-    padding: 6px 10px;
-    font-size: 12px;
+
+
+/*Make text smaller on smaller screens.*/
+html {
+    font-size: 14px;
 }
 
-    input[type=submit] {
-        font-weight: bold;
-        background: #00abff;
-        color: #fff;
-        padding: 10px 20px;
-        font-size: 14px;
-        text-transform: uppercase;
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
     }
-
-.errorlist {
-    color: #cc0033;
-    float: left;
-    clear: both;
-    padding-left: 10px;
 }
 
-/* comments */
-.comment {
-    padding: 10px;
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
 }
 
-    .comment:nth-child(even) {
-        background: #efefef;
-    }
+/*Shouldn't be necessary, but I think bootstrap is overriding it if I just map to body tag*/
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
 
-    .comment .info {
-        font-weight: bold;
-        font-size: 12px;
-        color: #666;
-    }
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+/*Home page image*/
+.img-container {
+    width: 250px;
+    height: 300px;
+}
+
+/*Aspect ratio of 1.45*/
+.book-image {
+    width: 220px;
+    height: 319px;
+}
+
+.book-container {
+    margin-bottom: 40px;
+}
+
+.cover-description {
+    max-width: 220px;
+}
+
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+

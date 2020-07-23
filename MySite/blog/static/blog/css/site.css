@@ -1,77 +1,67 @@
-﻿
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿/* forms */
+label {
+    float: left;
+    clear: both;
+    color: #333;
+    margin-bottom: 4px;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+input, textarea {
+    clear: both;
+    /*    float: left;*/
+    margin: 5px;
+    background: #ededed;
+    border: 0;
+    padding: 6px 10px;
+    font-size: 12px;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+#inputs input {
+    margin-left: 5px;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+#inputs textarea {
+    margin-left: 5px;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+    input[type=submit] {
+        font-weight: bold;
+        background: #00abff;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-/*html {
-  position: relative;
-  min-height: 100%;
+/*.errorlist {
+    color: #cc0033;
+    float: left;
+    clear: both;
+    padding-left: 10px;
 }*/
 
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
+/* comments on blog post*/
+.comment {
+    padding: 10px;
 }
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
-}
+
+    .comment:nth-child(even) {
+        background: #efefef;
+    }
+
+    .comment .info {
+        font-weight: bold;
+        font-size: 12px;
+        color: #666;
+    }
 
 
 
-.img-container {
-    width: 250px;
-    height: 300px;
+
+/*.border-top {
+    border-top: 1px solid #e5e5e5;
 }
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}*/
