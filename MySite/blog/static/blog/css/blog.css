@@ -3,17 +3,22 @@ header {
 }
 
 .nav-link {
-    color: black; /*What would be a better color?*/
+    color: black !important; /*What would be a better color?*/
 }
 
 /*Blog post date*/
 
 p.date {
-    color: #ccc;
+/*    color: #ccc;*/
     font-family: georgia, serif;
-    font-size: 12px;
+    font-size: 14px;
     font-style: italic;
 }
+
+
+/*.blog-title {
+    font-size: small;
+}*/
 
 .pagination {
     margin: 25px 0;

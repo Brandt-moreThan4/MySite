@@ -5,8 +5,8 @@
 
 {% block content %}
     <h1>Really need a Blog Title</h1>
-    <br />
-    <br />
+    <br /><br /><br />
+
 
     <div class="col-md-9">
         {% if tag %}
@@ -15,7 +15,7 @@
 
         {% for post in posts %}
             <h2>
-                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
             </h2>
         
             <p>
@@ -33,6 +33,8 @@
             </p>
 
             {{ post.body|truncatewords:75|linebreaks }}
+
+            <br /><br />
         {% endfor %}
     
         {% include "pagination.html" with page=posts %}    

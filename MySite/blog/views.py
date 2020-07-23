@@ -5,7 +5,8 @@ from django.views.generic import ListView
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 from taggit.models import Tag
-from django.db.models import Count
+#from django.db.models import Count
+from django.db.models import Q
 
 
 
@@ -26,7 +27,7 @@ def post_list(request, tag_slug=None):
         tag = get_object_or_404(Tag, slug=tag_slug)
         object_list = object_list.filter(tags__in=[tag])
 
-    paginator = Paginator(object_list, 3) # 3 posts per page
+    paginator = Paginator(object_list, 6) 
     page = request.GET.get('page') #what is this doing?
     try:
         posts = paginator.page(page)
@@ -50,7 +51,7 @@ def post_detail(request, year, month, day, post):
                                    created__day=day)
 
     # List of active comments for this post
-    comments = post.comments.filter(active=True) # Would this not be executed until it is called in the view template?
+    comments = post.comments.filter(active=True) 
     new_comment = None
 
     if request.method == 'POST':
@@ -65,10 +66,6 @@ def post_detail(request, year, month, day, post):
             new_comment.save()
     else:
         comment_form = CommentForm()
-
-    #post_tags_ids = post.tags.values_list('id', flat=True)
-    #similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
-    #similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-publish')[:4]
 
     return render(request, 'blog/post/detail.html',
                  {'post': post,
@@ -114,10 +111,19 @@ def book_detail(request):
 def knowledge_repo(request):
     """Produces the beautiful table of learning"""
 
+    try:
+        search_term = request.GET['search_box']
+    except:
+        search_term = ''
 
+    if search_term == '':
+        knowledge_list = Knowledge.objects.all()
+    else:
+        #Does not filter for tags
+        knowledge_list = Knowledge.objects.filter(Q(author__icontains=search_term) | Q(description__icontains=search_term))
+        #knowledge_list = Knowledge.objects.filter(Q(author__icontains=search_term) | Q(description__icontains=search_term) | Q(tags__in=[search_term]))
+        #knowledge_list = Knowledge.objects.filter(tags__in=[search_term])
 
-    knowledge_list = Knowledge.objects.all()
-    
     return render(request, 'blog/knowledge_repo.html', {'knowledge_list': knowledge_list})
 
 
