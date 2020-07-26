@@ -75,7 +75,9 @@ def post_detail(request, year, month, day, post):
 
 
 def post_share(request, post_id):
-    """Sharing a post via email. This view handles both the processing of get request and post."""
+    """Sharing a post via email. This view handles both the processing of get request and post.
+    Currently there is no link on blog detail page to get to this. Need to fiddle with email stuff more first."""
+
     post = get_object_or_404(Post, id=post_id)
     sent = False
 

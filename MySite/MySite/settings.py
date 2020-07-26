@@ -25,7 +25,7 @@ SECRET_KEY = 'ea1e6bd5-f62a-4595-bd7a-64ebce4555ce'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['153144green.pythonanywhere.com', 'localhost']
 
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
@@ -115,9 +115,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 
-"""Below needed for sending emails"""
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'brandtgreen97@gmail.com'
-EMAIL_HOST_PASSWORD = '35aJIahI'
-EMAIL_USE_TLS = True
+#for python anywhere
+#STATIC_URL = '/static/'
+#STATIC_ROOT = "/home/153144green/MySite/static"
+
