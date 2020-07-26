@@ -32,6 +32,9 @@
   <ItemGroup>
     <Compile Include="blog\admin.py" />
     <Compile Include="blog\apps.py" />
+    <Compile Include="blog\data\data_export.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="blog\forms.py">
       <SubType>Code</SubType>
     </Compile>
@@ -49,18 +52,8 @@
     <Compile Include="MySite\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="blog\static\blog\css\bootstrap\bootstrap-grid.css" />
-    <Content Include="blog\static\blog\css\bootstrap\bootstrap-grid.css.map" />
-    <Content Include="blog\static\blog\css\bootstrap\bootstrap-grid.min.css" />
-    <Content Include="blog\static\blog\css\bootstrap\bootstrap-grid.min.css.map" />
-    <Content Include="blog\static\blog\css\bootstrap\bootstrap-reboot.css" />
-    <Content Include="blog\static\blog\css\bootstrap\bootstrap-reboot.css.map" />
-    <Content Include="blog\static\blog\css\bootstrap\bootstrap-reboot.min.css" />
-    <Content Include="blog\static\blog\css\bootstrap\bootstrap-reboot.min.css.map" />
     <Content Include="blog\static\blog\css\bootstrap\bootstrap.css" />
-    <Content Include="blog\static\blog\css\bootstrap\bootstrap.css.map" />
     <Content Include="blog\static\blog\css\bootstrap\bootstrap.min.css" />
-    <Content Include="blog\static\blog\css\bootstrap\bootstrap.min.css.map" />
     <Content Include="blog\static\blog\css\site.css" />
     <Content Include="blog\static\blog\Images\BlackHole.jpg" />
     <Content Include="blog\static\blog\Images\BlogPics\FREDCorporateProfits.PNG" />
@@ -176,16 +169,9 @@
     <Content Include="blog\static\blog\Images\lsuGraduation.jpg" />
     <Content Include="blog\static\blog\css\blog.css" />
     <Content Include="blog\static\blog\js\bootstrap\bootstrap.bundle.js" />
-    <Content Include="blog\static\blog\js\bootstrap\bootstrap.bundle.js.map" />
     <Content Include="blog\static\blog\js\bootstrap\bootstrap.bundle.min.js" />
-    <Content Include="blog\static\blog\js\bootstrap\bootstrap.bundle.min.js.map" />
-    <Content Include="blog\static\blog\js\bootstrap\bootstrap.js" />
-    <Content Include="blog\static\blog\js\bootstrap\bootstrap.js.map" />
-    <Content Include="blog\static\blog\js\bootstrap\bootstrap.min.js" />
-    <Content Include="blog\static\blog\js\bootstrap\bootstrap.min.js.map" />
     <Content Include="blog\static\blog\js\jquery\jquery.js" />
     <Content Include="blog\static\blog\js\jquery\jquery.min.js" />
-    <Content Include="blog\static\blog\js\jquery\jquery.min.map" />
     <Content Include="blog\static\websiteDB.xlsx" />
     <Content Include="blog\templates\blog\base.html" />
     <Content Include="blog\templates\blog\book\list.html" />
@@ -200,6 +186,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="blog\" />
+    <Folder Include="blog\data\" />
+    <Folder Include="blog\data\data_dump\" />
     <Folder Include="blog\static\blog\css\bootstrap\" />
     <Folder Include="blog\static\blog\Images\BlogPics\" />
     <Folder Include="blog\static\blog\Images\Books\" />

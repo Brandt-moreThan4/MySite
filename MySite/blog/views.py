@@ -5,8 +5,8 @@ from django.views.generic import ListView
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 from taggit.models import Tag
-#from django.db.models import Count
 from django.db.models import Q
+from .data import data_export
 
 
 
@@ -102,12 +102,13 @@ def book_list(request):
     """Renders the generic book list view"""
 
     books = Book.objects.all()    
-
     return render(request, 'blog/book/list.html', {'books': books})
+
 
 
 def book_detail(request):
     pass
+
 
 
 def knowledge_repo(request):
@@ -130,6 +131,18 @@ def knowledge_repo(request):
 def data_import(request):
     """lolol"""
     
+    if request.method == 'POST':
+        if request.POST.get('Book'):            
+            data_export.export_books()
+        elif request.POST.get('Blog'):
+            pass
+        elif request.POST.get('Knowledge'):
+            pass
+        
+    return render(request, 'blog/data_import.html')
+
+
+
     #if request.method == 'POST':
     #    file = request.FILES['filey_name']
     #    for line in open(file):
@@ -141,5 +154,3 @@ def data_import(request):
     #    return render(request, 'blog/data_import.html')
     #else:
     #    return render(request, 'blog/data_import.html')
-    return render(request, 'blog/data_import.html')
-

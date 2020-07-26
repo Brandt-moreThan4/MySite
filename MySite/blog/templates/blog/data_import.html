@@ -7,11 +7,25 @@
      <br /><br />
            
 
+
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>            
+            <br />
+            <button type="submit" value="Book" name="Book" class="btn btn-primary">Export Book</button><br />
+            <button type="submit" value="Blog" name="Blog" class="btn btn-primary">Export Blog</button><br />
+            <button type="submit" value="Knowledge" name="Knowledge" class="btn btn-primary">Export Knowledge</button><br />
+        </fieldset>
+    </form>  
+
+
+    {% comment %}
     <p>Below is supposed to be a python console that you can use to play around with, but it has been fickle for me in the
         past so I apologize if it is not working.    
     </p>
     <iframe style="width: 640; height: 480; border-style:solid;" name="embedded_python_anywhere" src="https://www.pythonanywhere.com/embedded3/"></iframe>
-    
+    {% endcomment %}
 
     <br /><br /><br /><br />
 
@@ -28,5 +42,8 @@
 
     </form>  
 {% endcomment %}   
+
+
+
 
 {% endblock %}
