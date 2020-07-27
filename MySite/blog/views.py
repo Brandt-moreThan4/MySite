@@ -1,12 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Book, Comment, Knowledge
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import ListView
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 from taggit.models import Tag
 from django.db.models import Q
-from .data import data_export
+from .data import data_import, data_export
 
 
 
@@ -128,29 +127,25 @@ def knowledge_repo(request):
     return render(request, 'blog/knowledge_repo.html', {'knowledge_list': knowledge_list})
 
 
-def data_import(request):
+def data_play(request):
     """lolol"""
     
     if request.method == 'POST':
+        #Depending on what button you click you will performa a different action
+
+        # First three are exporting of different data
         if request.POST.get('Book'):            
-            data_export.export_books()
+            data_export.export_db(Book)
         elif request.POST.get('Blog'):
-            pass
+            data_export.export_db(Post)
         elif request.POST.get('Knowledge'):
-            pass
+            data_export.export_db(Knowledge)
+        elif request.POST.get('knowledge_import'):
+            data_import.import_knowledge()
+        elif request.POST.get('book_import'):
+            data_import.import_books()
+
         
     return render(request, 'blog/data_import.html')
 
 
-
-    #if request.method == 'POST':
-    #    file = request.FILES['filey_name']
-    #    for line in open(file):
-    #        print(line)    
-    #    print('lol')
-    #try:
-    #    input_value = request.GET['texty']
-    #except:
-    #    return render(request, 'blog/data_import.html')
-    #else:
-    #    return render(request, 'blog/data_import.html')

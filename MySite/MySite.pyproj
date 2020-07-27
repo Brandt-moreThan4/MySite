@@ -35,6 +35,12 @@
     <Compile Include="blog\data\data_export.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="blog\data\data_import.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="blog\data\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="blog\forms.py">
       <SubType>Code</SubType>
     </Compile>
@@ -52,6 +58,7 @@
     <Compile Include="MySite\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="blog\data\data_dump\websiteDB.xlsx" />
     <Content Include="blog\static\blog\css\bootstrap\bootstrap.css" />
     <Content Include="blog\static\blog\css\bootstrap\bootstrap.min.css" />
     <Content Include="blog\static\blog\css\site.css" />
@@ -62,6 +69,7 @@
     <Content Include="blog\static\blog\Images\Books\ADemonOfOurOwnDesign.jpg" />
     <Content Include="blog\static\blog\Images\Books\AgainstTheGods.jpg" />
     <Content Include="blog\static\blog\Images\Books\AgeOfTurbulence.jpg" />
+    <Content Include="blog\static\blog\Images\Books\AlexanderHamilton.jpg" />
     <Content Include="blog\static\blog\Images\Books\AllTheDevilsAreHere.jpg" />
     <Content Include="blog\static\blog\Images\Books\AManForAllMarkets.jpg" />
     <Content Include="blog\static\blog\Images\Books\AmericanSniper.jpg" />
@@ -74,12 +82,14 @@
     <Content Include="blog\static\blog\Images\Books\BenFranklin.jpg" />
     <Content Include="blog\static\blog\Images\Books\BenFranklinAutoBiography.jpg" />
     <Content Include="blog\static\blog\Images\Books\BigShort.jpg" />
+    <Content Include="blog\static\blog\Images\Books\BirthOfPlenty.jpg" />
     <Content Include="blog\static\blog\Images\Books\BlackSwan.jpg" />
     <Content Include="blog\static\blog\Images\Books\BlindWatchmaker.jpg" />
     <Content Include="blog\static\blog\Images\Books\Blink.jpg" />
     <Content Include="blog\static\blog\Images\Books\Boomerang.jpg" />
     <Content Include="blog\static\blog\Images\Books\BornACrime.jpg" />
     <Content Include="blog\static\blog\Images\Books\BornToRun.jpg" />
+    <Content Include="blog\static\blog\Images\Books\BusinessAdventuresTwelveClassicTalesfromtheWorldofWallStreet.jpg" />
     <Content Include="blog\static\blog\Images\Books\CapitalIdeasEvolving.jpg" />
     <Content Include="blog\static\blog\Images\Books\CapitalIntheTwentyFirstCentury.jpg" />
     <Content Include="blog\static\blog\Images\Books\ChaosMakingANewScience.jpg" />
@@ -95,19 +105,23 @@
     <Content Include="blog\static\blog\Images\Books\Einstein.jpg" />
     <Content Include="blog\static\blog\Images\Books\ElonMusk.jpg" />
     <Content Include="blog\static\blog\Images\Books\EnlightenmentNow.jpg" />
+    <Content Include="blog\static\blog\Images\Books\FightClub.jpg" />
     <Content Include="blog\static\blog\Images\Books\FlashBoys.jpg" />
     <Content Include="blog\static\blog\Images\Books\ForTheLoveOfPhysics.jpg" />
+    <Content Include="blog\static\blog\Images\Books\FragilebyDesignThePoliticalOriginsofBankingCrisesandScarceCredit.jpg" />
     <Content Include="blog\static\blog\Images\Books\Freakonomics.jpg" />
     <Content Include="blog\static\blog\Images\Books\GeneAnIntimateHistory.jpg" />
     <Content Include="blog\static\blog\Images\Books\GunsGermsSteel.jpg" />
     <Content Include="blog\static\blog\Images\Books\HedgeFundInvesting.jpg" />
     <Content Include="blog\static\blog\Images\Books\HedgingMarketExposures.jpg" />
+    <Content Include="blog\static\blog\Images\Books\HitRefresh.jpg" />
     <Content Include="blog\static\blog\Images\Books\HouseOfMorgan.jpg" />
     <Content Include="blog\static\blog\Images\Books\IntuitionKnowingBeyondLogic.jpg" />
     <Content Include="blog\static\blog\Images\Books\InvestingPsychology.jpg" />
     <Content Include="blog\static\blog\Images\Books\IrrationalExuberance.jpg" />
     <Content Include="blog\static\blog\Images\Books\LeonardoDaVinci.jpg" />
     <Content Include="blog\static\blog\Images\Books\Liar%27sPoker.jpg" />
+    <Content Include="blog\static\blog\Images\Books\LoneSurvivor.jpg" />
     <Content Include="blog\static\blog\Images\Books\LordsOfFinance.jpg" />
     <Content Include="blog\static\blog\Images\Books\Lying.jpg" />
     <Content Include="blog\static\blog\Images\Books\MalcomX.jpg" />
@@ -131,6 +145,7 @@
     <Content Include="blog\static\blog\Images\Books\PyschopathWhisperer.jpg" />
     <Content Include="blog\static\blog\Images\Books\Reagan.jpg" />
     <Content Include="blog\static\blog\Images\Books\RichardFeynman.jpg" />
+    <Content Include="blog\static\blog\Images\Books\RunningwiththeBuffaloes.jpg" />
     <Content Include="blog\static\blog\Images\Books\Seveneves.jpg" />
     <Content Include="blog\static\blog\Images\Books\ShakyGround.jpg" />
     <Content Include="blog\static\blog\Images\Books\SherlockHolmes.jpg" />
@@ -145,6 +160,7 @@
     <Content Include="blog\static\blog\Images\Books\SuperFreakonomics.jpg" />
     <Content Include="blog\static\blog\Images\Books\TheCheckListManifesto.jpg" />
     <Content Include="blog\static\blog\Images\Books\TheCourageToAct.jpg" />
+    <Content Include="blog\static\blog\Images\Books\TheFirstAmericanTheLifeandTimesofBenjaminFranklin.jpg" />
     <Content Include="blog\static\blog\Images\Books\TheFour.jpg" />
     <Content Include="blog\static\blog\Images\Books\TheHeroWithAThousandFaces.jpg" />
     <Content Include="blog\static\blog\Images\Books\TheMagicOfReality.jpg" />
@@ -157,12 +173,15 @@
     <Content Include="blog\static\blog\Images\Books\ThomasJeffersonAndTheTripoliPirates.jpg" />
     <Content Include="blog\static\blog\Images\Books\TippingPoint.jpg" />
     <Content Include="blog\static\blog\Images\Books\TooBigToFail.jpg" />
+    <Content Include="blog\static\blog\Images\Books\TroubledWaterWhatsWrongwithWhatWeDrink.jpg" />
     <Content Include="blog\static\blog\Images\Books\Unbroken.jpg" />
     <Content Include="blog\static\blog\Images\Books\UncertainWorld.jpg" />
     <Content Include="blog\static\blog\Images\Books\UndoingProject.jpg" />
+    <Content Include="blog\static\blog\Images\Books\WhatDoYouCareWhatOtherPeopleThink.jpg" />
     <Content Include="blog\static\blog\Images\Books\WhenGeniusFailed.jpg" />
     <Content Include="blog\static\blog\Images\Books\WinningTheLoser%27sGame.jpg" />
     <Content Include="blog\static\blog\Images\Books\WolfOfWallStreet.jpg" />
+    <Content Include="blog\static\blog\Images\Books\WorkingTogetherWhyGreatPartnershipsSucceed.jpg" />
     <Content Include="blog\static\blog\Images\LanguageLogos\CSharp.png" />
     <Content Include="blog\static\blog\Images\LanguageLogos\Python.png" />
     <Content Include="blog\static\blog\Images\LanguageLogos\VBA.png" />
@@ -172,7 +191,6 @@
     <Content Include="blog\static\blog\js\bootstrap\bootstrap.bundle.min.js" />
     <Content Include="blog\static\blog\js\jquery\jquery.js" />
     <Content Include="blog\static\blog\js\jquery\jquery.min.js" />
-    <Content Include="blog\static\websiteDB.xlsx" />
     <Content Include="blog\templates\blog\base.html" />
     <Content Include="blog\templates\blog\book\list.html" />
     <Content Include="blog\templates\blog\data_import.html" />

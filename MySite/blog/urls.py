@@ -11,6 +11,6 @@ urlpatterns = [
     path('blog/<int:post_id>/share/', views.post_share, name='post_share'),
     path('books/', views.book_list, name='book_list'),
     path('knowledge-repo/', views.knowledge_repo,  name='knowledge_repo'),
-    path('data/', views.data_import,  name='data_import')
+    path('data/', views.data_play,  name='data_import')
 
     ]
