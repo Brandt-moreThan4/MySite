@@ -42,7 +42,7 @@
                 <tr>
                     <td>{{ knowledge.author }}</td>
                     <td><a href="{{ knowledge.source }}">{{ knowledge.description }}</a></td>
-                    <td>{{ knowledge.tags.all|join:", " }}</td>
+                    <td>{{ knowledge.tags}}</td>
                 </tr>
             {% endfor %}
         </tbody>

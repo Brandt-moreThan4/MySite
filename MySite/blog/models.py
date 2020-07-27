@@ -74,6 +74,6 @@ class Knowledge(models.Model):
     author = models.CharField(max_length=500)
     description = models.TextField()
     source = models.TextField()
-    tags = TaggableManager()
+    tags = models.TextField(default='Placeholder')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateField(auto_now=True)

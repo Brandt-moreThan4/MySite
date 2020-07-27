@@ -122,7 +122,7 @@ def knowledge_repo(request):
         knowledge_list = Knowledge.objects.all()
     else:
         #Does not filter for tags that well. I shoudl change the tags back to strings
-        knowledge_list = Knowledge.objects.filter(Q(author__icontains=search_term) | Q(description__icontains=search_term) | Q(tags__name__in=[search_term]))
+        knowledge_list = Knowledge.objects.filter(Q(author__icontains=search_term) | Q(description__icontains=search_term)| Q(tags__icontains=search_term))
 
     return render(request, 'blog/knowledge_repo.html', {'knowledge_list': knowledge_list})
 
@@ -144,8 +144,10 @@ def data_play(request):
             data_import.import_knowledge()
         elif request.POST.get('book_import'):
             data_import.import_books()
+        elif request.POST.get('knowledge_update'):
+            data_import.update_knowledge()
+            
 
-        
     return render(request, 'blog/data_import.html')
 
 

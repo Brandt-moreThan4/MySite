@@ -21,9 +21,24 @@ def import_knowledge():
         new_knowledge.author = sht["B" + str(i)].value
         new_knowledge.description = sht["C" + str(i)].value
         new_knowledge.source = sht["D" + str(i)].value
+        new_knowledge.tags = sht["E" + str(i)].value
         new_knowledge.save()
-        # You must save the model to db before adding tags
-        new_knowledge.tags.add(sht["E" + str(i)].value)
+
+
+
+def update_knowledge():
+    """This updates the knowledge table keywords based on what's in the spreadsheet. Uses primary key to identify which record to update."""
+    wb = openpyxl.load_workbook(IMPORT_PATH)
+    sht = wb['Knowledge']
+
+    for i in range(2, get_last_row(sht, 'B') + 1):
+        print(f'I am on excel row: {i} about to alter: {sht["C" + str(i)].value}')
+        id = sht["A" + str(i)].value
+        current_knowledge = Knowledge.objects.get(pk=sht["A" + str(i)].value)
+        taggies = sht["E" + str(i)].value
+        current_knowledge.tags = taggies
+        current_knowledge.save()
+
 
 
 def import_books():
@@ -54,5 +69,5 @@ def get_last_row(sht, column='A'):
     row = 1
     while sht[f'{column}{row}'].value is not None:
         row += 1
-    return row
+    return row - 1
 
