@@ -67,6 +67,23 @@ class Book(models.Model):
     updated = models.DateField(auto_now=True)
     tags = TaggableManager()
 
+    class Meta:
+        """Sort posts by created date"""
+        ordering = ('-created',)
+
+
+    def __str__(self):
+        """This is what shows up in admin page"""
+        return self.book_title
+
+
+    def get_absolute_url(self):
+        """Retrieve the absolute url for a book detail"""
+        return reverse('blog:post_detail',
+                       args=[self.created.year,
+                             self.created.month,
+                             self.created.day,
+                             self.slug])
 
 class Knowledge(models.Model):
     """Class to model a knowledge record"""

@@ -39,17 +39,20 @@
                 <br /><br />
 
             {% elif type == 'Book' %}
+                <div>
+                    <h4>
+                        <a class="blog-title" href="/">Book notes for: {{ post.book_title }}</a>
+                    </h4>
                     <div>
                         <a href="/">
                             <img class="book-image" src=
-                                 "{% with 'blog/Images/Books/'|add:post.image_name as image_static %}
+                                    "{% with 'blog/Images/Books/'|add:post.image_name as image_static %}
                                         {% static image_static %}
-                                  {% endwith %}" />                             
+                                    {% endwith %}" />                             
                         </a>
-                        <div class="book-cover-description">
-                            {{ post.cover_description }} 
-                        </div>
                     </div>
+                </div>
+                <br /><br />
             {% endif %}
 
         {% endfor %}
