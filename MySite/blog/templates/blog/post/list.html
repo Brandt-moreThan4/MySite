@@ -13,31 +13,48 @@
             <h2>Posts tagged with "{{ tag.name }}"</h2>
         {% endif %}
 
-        {% for post in posts %}
-            <h2>
-                <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-            </h2>
+        {% for post, type in all_posts %}
+            {% if type == 'Post' %}
+                <div>
+                    <h4>
+                        <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    </h4>
         
-            <p>
-                Tags: 
-                {% for tag in post.tags.all %}
-                    <a href="{% url "blog:post_list_by_tag" tag.slug %}">
-                        {{ tag.name }}
-                    </a>
-                    {% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </p>
+                    <p>
+                        Tags: 
+                        {% for tag in post.tags.all %}
+                            <a href="{% url "blog:post_list_by_tag" tag.slug %}">
+                                {{ tag.name }}
+                            </a>
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
 
-            <p class="date">
-                Created on {{ post.created }}
-            </p>
+                    <p class="date">
+                        Created on {{ post.created|date:"DATE_FORMAT" }}
+                    </p>
 
-            {{ post.body|truncatewords:75|linebreaks }}
+                    {{ post.body|truncatewords:75|linebreaks }}
+                </div>
+                <br /><br />
 
-            <br /><br />
+            {% elif type == 'Book' %}
+                    <div>
+                        <a href="/">
+                            <img class="book-image" src=
+                                 "{% with 'blog/Images/Books/'|add:post.image_name as image_static %}
+                                        {% static image_static %}
+                                  {% endwith %}" />                             
+                        </a>
+                        <div class="book-cover-description">
+                            {{ post.cover_description }} 
+                        </div>
+                    </div>
+            {% endif %}
+
         {% endfor %}
     
-        {% include "pagination.html" with page=posts %}    
+        {% include "pagination.html" with page=all_posts %}    
     </div>
 {% endblock %}
 

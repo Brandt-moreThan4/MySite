@@ -39,8 +39,6 @@ def update_knowledge():
         current_knowledge.tags = taggies
         current_knowledge.save()
 
-
-
 def import_books():
     """Take books from excel spreadsheet and upload the to sql database"""
     
@@ -59,6 +57,14 @@ def import_books():
         new_book.image_name = sht["G" + str(i)].value       
         new_book.created = sht["H" + str(i)].value 
         new_book.save()
+
+
+def update_books():
+    """This updates the knowledge table keywords based on what's in the spreadsheet. Uses primary key to identify which record to update."""
+    books = Book.objects.all()
+    for record in books:
+        record.body = 'Placeholder'
+        record.save()
 
 
 def get_last_row(sht, column='A'):

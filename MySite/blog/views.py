@@ -19,25 +19,38 @@ def home(request):
 def post_list(request, tag_slug=None):
     """Displays the posts."""
 
-    object_list = Post.objects.all()
+    posts = Post.objects.all()
+    books = Book.objects.exclude(body='Placeholder')
+
     tag = None
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
-        object_list = object_list.filter(tags__in=[tag])
+        posts = posts.filter(tags__in=[tag])
+        books = books.filter(tags__in=[tag])
 
-    paginator = Paginator(object_list, 6) 
-    page = request.GET.get('page') #what is this doing?
+    posts_and_books = list(posts) + list(books)
+    posts_and_books.sort(reverse=True, key=lambda model: model.created)
+
+    # Below loop creates a new list containing tuples for each post with the second tuple index containing the post type
+    # such as 'Post' or 'Book'
+    all_posts = []
+    for i in range(len(posts_and_books)):
+        all_posts.append((posts_and_books[i], posts_and_books[i].__class__.__name__))
+
+    paginator = Paginator(all_posts, 7) 
+    page = request.GET.get('page') # Look at paginator template to see how this value would be set.
+   
     try:
-        posts = paginator.page(page)
+        all_posts = paginator.page(page)
     except PageNotAnInteger:
         # If the page is not an integer then deliver the first page.
-        posts = paginator.page(1)
+        all_posts = paginator.page(1)
     except EmptyPage:
         # If the page is out of range deliver the last page of results.
-        posts = paginator.page(paginator.num_pages)
+        all_posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'blog/post/list.html', {'page': page,'posts': posts, 'tag': tag})
+    return render(request, 'blog/post/list.html', {'all_posts': all_posts, 'tag': tag})
 
 
 def post_detail(request, year, month, day, post):
@@ -73,37 +86,15 @@ def post_detail(request, year, month, day, post):
                  'comment_form': comment_form})
 
 
-def post_share(request, post_id):
-    """Sharing a post via email. This view handles both the processing of get request and post.
-    Currently there is no link on blog detail page to get to this. Need to fiddle with email stuff more first."""
-
-    post = get_object_or_404(Post, id=post_id)
-    sent = False
-
-    if request.method =='POST':
-        form = EmailPostForm(request.POST)
-        if form.is_valid():
-            form_data = form.cleaned_data
-            post_url = request.build_absolute_uri(
-                post.get_absolute_url())
-            subject = f"Yo. {form_data['name']} thinks you should read this post: {post.title}"
-            message = f"Read that shit at {post_url} \n\n My comments: {form_data['comments']}" # I have not tested after adding this line yet
-            send_mail(subject, message, 'brandtgreen97@gmail.com', [form_data['to']])
-            sent = True
-    else:
-        form = EmailPostForm()
-
-    return render(request, 'blog/post/share.html', {'post': post, 'form': form, 'sent': sent})
-
 
 
 def book_list(request):
     """Renders the generic book list view"""
 
-    books = Book.objects.all()    
+    books = Book.objects.order_by('-created')  
     return render(request, 'blog/book/list.html', {'books': books})
 
-
+    
 
 def book_detail(request):
     pass
@@ -112,6 +103,7 @@ def book_detail(request):
 
 def knowledge_repo(request):
     """Produces the beautiful table of learning"""
+
 
     try:
         search_term = request.GET['search_box']
@@ -123,6 +115,12 @@ def knowledge_repo(request):
     else:
         #Does not filter for tags that well. I shoudl change the tags back to strings
         knowledge_list = Knowledge.objects.filter(Q(author__icontains=search_term) | Q(description__icontains=search_term)| Q(tags__icontains=search_term))
+
+    #all_tags= []
+    #for rec in knowledge_list:
+    #    tags = rec.tags
+    #    split_tags = tags.split(';')
+    #    all_tags.append(split_tags)
 
     return render(request, 'blog/knowledge_repo.html', {'knowledge_list': knowledge_list})
 
@@ -146,8 +144,31 @@ def data_play(request):
             data_import.import_books()
         elif request.POST.get('knowledge_update'):
             data_import.update_knowledge()
+        elif request.POST.get('update_book'):
+            data_import.update_books()
             
 
     return render(request, 'blog/data_import.html')
 
 
+def post_share(request, post_id):
+    """Sharing a post via email. This view handles both the processing of get request and post.
+    Currently there is no link on blog detail page to get to this. Need to fiddle with email stuff more first."""
+
+    post = get_object_or_404(Post, id=post_id)
+    sent = False
+
+    if request.method =='POST':
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            form_data = form.cleaned_data
+            post_url = request.build_absolute_uri(
+                post.get_absolute_url())
+            subject = f"Yo. {form_data['name']} thinks you should read this post: {post.title}"
+            message = f"Read that shit at {post_url} \n\n My comments: {form_data['comments']}" # I have not tested after adding this line yet
+            send_mail(subject, message, 'brandtgreen97@gmail.com', [form_data['to']])
+            sent = True
+    else:
+        form = EmailPostForm()
+
+    return render(request, 'blog/post/share.html', {'post': post, 'form': form, 'sent': sent})

@@ -19,3 +19,9 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('name', 'body')
 
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['body'].widget.attrs.update({'class' : 'form-control'})
+
+

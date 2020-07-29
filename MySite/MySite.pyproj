@@ -46,6 +46,8 @@
     </Compile>
     <Compile Include="blog\migrations\__init__.py" />
     <Compile Include="blog\models.py" />
+    <Compile Include="blog\templatetags\blog_tags.py" />
+    <Compile Include="blog\templatetags\___init__.py" />
     <Compile Include="blog\urls.py">
       <SubType>Code</SubType>
     </Compile>
@@ -206,6 +208,7 @@
     <Folder Include="blog\" />
     <Folder Include="blog\data\" />
     <Folder Include="blog\data\data_dump\" />
+    <Folder Include="blog\templatetags\" />
     <Folder Include="blog\static\blog\css\bootstrap\" />
     <Folder Include="blog\static\blog\Images\BlogPics\" />
     <Folder Include="blog\static\blog\Images\Books\" />

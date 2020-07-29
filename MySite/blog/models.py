@@ -65,6 +65,7 @@ class Book(models.Model):
     image_name = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
+    tags = TaggableManager()
 
 
 class Knowledge(models.Model):

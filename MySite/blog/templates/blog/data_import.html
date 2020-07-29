@@ -12,21 +12,41 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
              {# Could instead use one book name and different values for to differentiate on back end? #}    
+            <div class="row">
                 <div class="col">
-                    <button type="submit" value="Book" name="Book" class="btn btn-primary">Export Book</button><br /><br />
-                    <button type="submit" value="Blog" name="Blog" class="btn btn-primary">Export Blog</button><br /><br />
-                    <button type="submit" value="Knowledge" name="Knowledge" class="btn btn-primary">Export Knowledge</button>       
+                    <div class="btn-group">
+                        <button type="submit" value="Book" name="Book" class="btn btn-primary">Export Book</button><br /><br />
+                        <button type="submit" value="Blog" name="Blog" class="btn btn-info">Export Blog</button><br /><br />
+                        <button type="submit" value="Knowledge" name="Knowledge" class="btn btn-secondary">Export Knowledge</button>       
+                    </div>
                 </div>
-                    <button type="submit" value="knowledge_update" name="knowledge_update" class="btn btn-primary">Update Knowledge</button>   
+
+                <div class="col">
+                    <div {#class="col"#}>
+                        <button type="submit" value="Book" name="Book" class="btn btn-primary">Export Book</button><br /><br />
+                        <button type="submit" value="update_book" name="update_book" class="btn btn-primary">Update Book</button><br /><br />
+                        <button type="submit" value="Blog" name="Blog" class="btn btn-primary">Export Blog</button><br /><br />
+                        <button type="submit" value="Knowledge" name="Knowledge" class="btn btn-primary">Export Knowledge</button>       
+                    </div>
+                </div>
+            </div>
 
         </form>  
     </div>
+
+
+
+
+
+
+
 
     {% comment %}
 
      <div class="col">
                     <button type="submit" value="knowledge_import" name="book_import" class="btn btn-primary">Import Knowledge</button>      
                     <button type="submit" value="book_import" name="book_import" class="btn btn-primary">Import Books</button> 
+                    <button type="submit" value="knowledge_update" name="knowledge_update" class="btn btn-primary">Update Knowledge</button>   
     </div>
 
 
@@ -37,20 +57,6 @@
     {% endcomment %}
 
     <br /><br /><br /><br />
-
-{% comment %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset>
-
-            <input type="file" id="myfile" name="filey_name" />
-            <br />
-            <button type="submit" value="Let's Fucking Do it!!!" class="btn btn-primary">Let's Fucking Do it!!!</button>
-        </fieldset>
-
-
-    </form>  
-{% endcomment %}   
 
 
 

@@ -1,5 +1,5 @@
 ﻿/* forms */
-label {
+/*label {
     float: left;
     clear: both;
     color: #333;
@@ -7,9 +7,9 @@ label {
 }
 
 input, textarea {
-    clear: both;
+    clear: both;*/
     /*    float: left;*/
-    margin: 5px;
+    /*margin: 5px;
     background: #ededed;
     border: 0;
     padding: 6px 10px;
@@ -31,7 +31,7 @@ input, textarea {
         padding: 10px 20px;
         font-size: 14px;
         text-transform: uppercase;
-    }
+    }*/
 
 /*.errorlist {
     color: #cc0033;
