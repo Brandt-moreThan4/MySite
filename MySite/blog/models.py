@@ -5,6 +5,10 @@ from taggit.managers import TaggableManager
 
 
 
+class Post1(models.model):
+    pass
+
+
 class Post(models.Model):
     """Class to model a blog post. """
     
