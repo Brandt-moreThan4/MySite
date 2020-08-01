@@ -1,58 +1,57 @@
 ﻿{% extends "blog/base.html" %}
 
-{% block title %}{{ book.book_title }}{% endblock %}
+{% block title %}{{ book_post.book_title }}{% endblock %}
 
 {% block content %}
     
     <div class="col-md-9">
-        <h1>{{ book.booktitle}}</h1>
+        <h1>{{ book_post.booktitle}}</h1>
         
         <p class="date">
-            Created on {{ post.created }}
+            Created on {{ book_post.created }}
         </p>
 
         <p>
-            {{ book.body|linebreaks }}
+            {{ book_post.post_body|linebreaks }}
         </p>
 
         <br /><br /><br />
-        
-        {% comment %}
-            <div id="inputs">
-                {% with comments.count as total_comments_count %}
-                    <h4>
-                        {{ total_comments_count }} Comment{{total_comments_count|pluralize }}
-                    </h4>
-                {% endwith %}
 
-                
-                {% for comment in comments %}
-                    <div class="comment">
-                        <p class="info">
-                            Comment {{ forloop.counter }} by {{ comment.name }} {{ comment.created }}
-                        </p>
-                        {{ comment.body|linebreaks }}
-                    </div>
+        <div id="inputs">
+            {% with comments.count as total_comments_count %}
+                <h4>
+                    {{ total_comments_count }} Comment{{total_comments_count|pluralize }}
+                </h4>
+            {% endwith %}
 
-                {% empty %}
-                    <p>There are no comments yet.</p>
-                {% endfor %}
-                <br /><hr />
+            
+            {% for comment in comments %}
+                <div class="comment">
+                    <p class="info">
+                        Comment {{ forloop.counter }} by {{ comment.name }} {{ comment.created|date:"DATE_FORMAT" }}
+                    </p>
+                    {{ comment.body|linebreaks }}
+                </div>
+
+            {% empty %}
+                <p>There are no comments yet.</p>
+            {% endfor %}
+            <br /><hr />
 
 
-                {% if new_comment %}
-                    <h5>Your comment has been added!</h5>
-                {% else %}
-                    <!--Form for adding a new comment-->
-                    <h5>Add a new comment:</h5>
-                    <form method="post">
-                        {{ comment_form.as_p }}
-                        {% csrf_token %}
-                        <input type="submit" value="Add Comment" />
-                    </form>
-                {% endif %}
-            </div>    
-        {% endcomment %}
-        
+            {% if new_comment %}
+                <h5>Your comment has been added!</h5>
+            {% else %}
+                <!--Form for adding a new comment-->
+                <h5>Add a new comment:</h5>
+                <form method="post">
+                    {{ comment_form.as_p }}
+                    {% csrf_token %}
+                    <input type="submit" value="Add Comment" />
+                </form>
+            {% endif %}
+        </div>    
+
+    
     </div>
 {% endblock %}

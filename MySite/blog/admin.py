@@ -1,13 +1,13 @@
 from django.contrib import admin
-from .models import Post, Book , Comment, Knowledge
+from .models import Knowledge, BlogPost, Book , Comment
 
 
-@admin.register(Post)
+@admin.register(BlogPost)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug')
+    list_display = ('post_title', 'slug')
     list_filter = ('created',)
-    search_fields = ('title', 'body')
-    prepopulated_fields = {'slug': ('title',)}
+    search_fields = ('post_title', 'post_body')
+    prepopulated_fields = {'slug': ('post_title',)}
     date_hierarchy = 'created'
     ordering = ('updated', 'created')
 
@@ -24,7 +24,7 @@ class PostAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ('book_title', 'slug')
     list_filter = ('created',)
-    search_fields = ('book_title', 'body', 'author')
+    search_fields = ('book_title', 'post_body', 'author')
     prepopulated_fields = {'slug': ('book_title',)}
     date_hierarchy = 'created'
     ordering = ('updated', 'created')

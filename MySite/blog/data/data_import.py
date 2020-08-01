@@ -2,10 +2,10 @@
 Mainly just the knowledge repo for now."""
 
 import openpyxl
-from ..models import Knowledge, Book
+from ..models import Knowledge, Book, BlogPost
 
 
-IMPORT_PATH = r'C:\Users\15314\source\repos\MySite\MySite\blog\data\data_dump\websiteDB.xlsx'
+IMPORT_PATH = r'C:\Users\15314\OneDrive\Desktop\Web Development\MySite\MySite\blog\data\data_dump\websiteDB.xlsx'
 
 
 def import_knowledge():
@@ -53,9 +53,9 @@ def import_books():
         new_book.slug = sht["C" + str(i)].value
         new_book.author = sht["D" + str(i)].value
         new_book.cover_description = sht["E" + str(i)].value
-        new_book.body = sht["F" + str(i)].value
+        new_book.post_body = sht["F" + str(i)].value
         new_book.image_name = sht["G" + str(i)].value       
-        new_book.created = sht["H" + str(i)].value 
+        #new_book.created = sht["H" + str(i)].value 
         new_book.save()
 
 
@@ -65,6 +65,24 @@ def update_books():
     for record in books:
         record.body = 'Placeholder'
         record.save()
+
+
+
+def import_blog():
+    """Take books from excel spreadsheet and upload the to sql database"""
+    
+    #add ability for it to only update records that are not already in there
+
+    wb = openpyxl.load_workbook(IMPORT_PATH)
+    sht = wb['Blog']
+
+    for i in range(2, get_last_row(sht, 'B') + 1):
+        new_blog = BlogPost()
+        new_blog.post_title = sht["B" + str(i)].value
+        new_blog.slug = sht["C" + str(i)].value
+        new_blog.post_body = sht["D" + str(i)].value
+        new_blog.save()
+
 
 
 def get_last_row(sht, column='A'):

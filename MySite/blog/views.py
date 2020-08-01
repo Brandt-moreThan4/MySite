@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Book, Comment, Knowledge
+from .models import BlogPost, Book, Comment, Knowledge
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
@@ -7,6 +7,14 @@ from taggit.models import Tag
 from django.db.models import Q
 from .data import data_import, data_export
 
+
+# Below prints convenient links to urls for debugging purposes
+
+print('http://127.0.0.1:8000/admin')
+print('http://127.0.0.1:8000/knowledge-repo')
+print('http://127.0.0.1:8000/data')
+print('http://127.0.0.1:8000/blog')
+print('http://127.0.0.1:8000/books')
 
 
 def home(request):
@@ -19,17 +27,17 @@ def home(request):
 def post_list(request, tag_slug=None):
     """Displays the posts."""
 
-    posts = Post.objects.all()
-    books = Book.objects.exclude(body='Placeholder')
+    blog_posts = BlogPost.objects.all()
+    books = Book.objects.exclude(post_body='Placeholder')
 
     tag = None
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
-        posts = posts.filter(tags__in=[tag])
+        blog_posts = blog_posts.filter(tags__in=[tag])
         books = books.filter(tags__in=[tag])
 
-    posts_and_books = list(posts) + list(books)
+    posts_and_books = list(blog_posts) + list(books)
     posts_and_books.sort(reverse=True, key=lambda model: model.created)
 
     # Below loop creates a new list containing tuples for each post with the second tuple index containing the post type
@@ -57,7 +65,7 @@ def post_detail(request, year, month, day, post):
     """Single Post"""
 
     # Below method raises an exception if the post is not found based on the url inputs provided.
-    post = get_object_or_404(Post, slug=post,                                  
+    post = get_object_or_404(BlogPost, slug=post,                                  
                                    created__year=year, 
                                    created__month=month,
                                    created__day=day)
@@ -76,6 +84,7 @@ def post_detail(request, year, month, day, post):
             new_comment.post = post
             # Save the comment to the database
             new_comment.save()
+            new_comment = True
     else:
         comment_form = CommentForm()
 
@@ -93,11 +102,42 @@ def book_list(request):
 
     books = Book.objects.order_by('-created')  
     return render(request, 'blog/book/list.html', {'books': books})
-
     
 
-def book_detail(request):
-    pass
+def book_detail(request, year, month, day, post):
+    """Single Book"""
+
+    # Below method raises an exception if the post is not found based on the url inputs provided.
+    book_post = get_object_or_404(Book, slug=post,                                  
+                                   created__year=year, 
+                                   created__month=month,
+                                   created__day=day)
+
+    # List of active comments for this post
+    comments = book_post.comments.filter(active=True) 
+    new_comment = None
+
+    if request.method == 'POST':
+        # A comment was posted
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create comment object but don't commit it to the database yet so you can link it to the post
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post = book_post
+            # Save the comment to the database
+            new_comment.save()
+            new_comment = True
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'blog/book/detail.html',
+                 {'book_post': book_post,
+                 'comments': comments,
+                 'new_comment': new_comment,
+                 'comment_form': comment_form})
+
+    
 
 
 
@@ -146,6 +186,8 @@ def data_play(request):
             data_import.update_knowledge()
         elif request.POST.get('update_book'):
             data_import.update_books()
+        elif request.POST.get('blog_update'):
+            data_import.import_blog()
             
 
     return render(request, 'blog/data_import.html')

@@ -14,19 +14,18 @@
         {% endif %}
 
         {% for post, type in all_posts %}
-            {% if type == 'Post' %}
+            {% if type == 'BlogPost' %}
                 <div>
                     <h4>
-                        <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                        <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.post_title }}</a>
                     </h4>
         
                     <p>
                         Tags: 
                         {% for tag in post.tags.all %}
-                            <a href="{% url "blog:post_list_by_tag" tag.slug %}">
+                            <a class="btn btn-primary" href="{% url "blog:post_list_by_tag" tag.slug %}">
                                 {{ tag.name }}
-                            </a>
-                            {% if not forloop.last %}, {% endif %}
+                            </a>                            
                         {% endfor %}
                     </p>
 
@@ -34,14 +33,14 @@
                         Created on {{ post.created|date:"DATE_FORMAT" }}
                     </p>
 
-                    {{ post.body|truncatewords:75|linebreaks }}
+                    {{ post.post_body|truncatewords:75|linebreaks }}
                 </div>
                 <br /><br />
 
             {% elif type == 'Book' %}
                 <div>
                     <h4>
-                        <a class="blog-title" href="/">Book notes for: {{ post.book_title }}</a>
+                        <a class="blog-title" href="{{ post.get_absolute_url }}">Book notes for: {{ post.book_title }}</a>
                     </h4>
                     <div>
                         <a href="/">
@@ -50,6 +49,7 @@
                                         {% static image_static %}
                                     {% endwith %}" />                             
                         </a>
+                        <!-- <p>{{ post.post_body}}</p> -->
                     </div>
                 </div>
                 <br /><br />
