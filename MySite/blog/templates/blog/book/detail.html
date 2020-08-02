@@ -5,7 +5,8 @@
 {% block content %}
     
     <div class="col-md-9">
-        <h1>{{ book_post.booktitle}}</h1>
+        <h1>{{ book_post.book_title}}</h1>
+        <br>
         
         <p class="date">
             Created on {{ book_post.created }}
@@ -23,8 +24,7 @@
                     {{ total_comments_count }} Comment{{total_comments_count|pluralize }}
                 </h4>
             {% endwith %}
-
-            
+ 
             {% for comment in comments %}
                 <div class="comment">
                     <p class="info">

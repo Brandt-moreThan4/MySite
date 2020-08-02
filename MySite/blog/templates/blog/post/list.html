@@ -43,7 +43,7 @@
                         <a class="blog-title" href="{{ post.get_absolute_url }}">Book notes for: {{ post.book_title }}</a>
                     </h4>
                     <div>
-                        <a href="/">
+                        <a href="{{ post.get_absolute_url }}">
                             <img class="book-image" src=
                                     "{% with 'blog/Images/Books/'|add:post.image_name as image_static %}
                                         {% static image_static %}
