@@ -22,7 +22,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Book)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('book_title', 'slug')
+    list_display = ('book_title', 'author')
     list_filter = ('created',)
     search_fields = ('book_title', 'post_body', 'author')
     prepopulated_fields = {'slug': ('book_title',)}
