@@ -26,7 +26,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('created',)
     search_fields = ('book_title', 'post_body', 'author')
     prepopulated_fields = {'slug': ('book_title',)}
-    date_hierarchy = 'created'
+    date_hierarchy = 'updated'
     ordering = ('updated', 'created')
 
 
@@ -36,5 +36,5 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('created',)
     search_fields = ('tags', 'description', 'author')
     prepopulated_fields = {'slug': ('author',)}
-    date_hierarchy = 'created'
+    date_hierarchy = 'updated'
     ordering = ('updated', 'created')

@@ -12,6 +12,6 @@ urlpatterns = [
     path('books/', views.book_list, name='book_list'),
     path('books/<int:year>/<int:month>/<int:day>/<slug:post>/', views.book_detail, name='book_detail'),
     path('knowledge-repo/', views.knowledge_repo,  name='knowledge_repo'),
-    path('data/', views.data_play,  name='data_import')
-
+    path('data/', views.data_play,  name='data_import'),
+    path('visuals/', views.visuals,  name='visuals'),
     ]

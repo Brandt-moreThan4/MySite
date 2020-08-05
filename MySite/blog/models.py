@@ -48,7 +48,8 @@ class Book(PostBase):
     book_title = models.CharField(max_length=300)    
     author = models.CharField(max_length=300)
     cover_description = models.TextField()
-    image_name = models.TextField()    
+    image_name = models.TextField()
+    blog_display = models.BooleanField(default=False)
 
     # class Meta:
     #     """Sort posts by created date"""
@@ -68,6 +69,7 @@ class Book(PostBase):
                              self.created.month,
                              self.created.day,
                              self.slug])
+
 
 class Comment(models.Model):
     """Comments on posts"""

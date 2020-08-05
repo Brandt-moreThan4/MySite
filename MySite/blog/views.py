@@ -13,8 +13,11 @@ from .data import data_import, data_export
 print('http://127.0.0.1:8000/admin')
 print('http://127.0.0.1:8000/knowledge-repo')
 print('http://127.0.0.1:8000/data')
+print('http://127.0.0.1:8000')
 print('http://127.0.0.1:8000/blog')
 print('http://127.0.0.1:8000/books')
+print('http://127.0.0.1:8000/visuals')
+
 
 
 def home(request):
@@ -214,3 +217,10 @@ def post_share(request, post_id):
         form = EmailPostForm()
 
     return render(request, 'blog/post/share.html', {'post': post, 'form': form, 'sent': sent})
+
+
+
+def visuals(request):
+        """The home page for visualizations"""
+
+        return render(request, 'blog/Visuals/Visuals.html')
