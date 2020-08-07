@@ -14,16 +14,17 @@
         }
     </style>
 {% endblock styles %}
+
+
+{% block nav_extension %}
+    <!-- <div class="jumbotron"> -->
+        <h1 class="text-center" style="background-color: aqua; width: 100%;">Welcome!</h1>
+    <!-- </div> -->
+{% endblock nav_extension %}
+
 {% block content %}
 
-    <div class="alert alert-info" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-            X
-        </button>
-        This website is currently under early development. Please don't judge it for typos or for being ugly.
-    </div>
-
-    <h1 class="text-center">Welcome!</h1>
+    
 
     <div class="row">
         <div class="col-md-9">
@@ -31,10 +32,20 @@
                 display any fun projects I am working on.
             </p>
         </div>
-        <div class="col-md-3 d-flex justify-content-center">
+    </div>
+
+    <div class="row" style="background-color:cornflowerblue;">
+        <div class="col-md-4 d-flex justify-content-center">
+            <img class="rounded img-fluid img-container" src="{% static 'blog/Images/lsuGraduation.jpg' %}"/>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+            <img class="rounded img-fluid img-container" src="{% static 'blog/Images/lsuGraduation.jpg' %}"/>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
             <img class="rounded img-fluid img-container" src="{% static 'blog/Images/lsuGraduation.jpg' %}"/>
         </div>
     </div>
+
     <br><br><br><br>
 
     <div class="row">

@@ -3,8 +3,9 @@ header {
 }
 
 .nav-link {
-    color: black !important; /*What would be a better color?*/
+    color: white !important; /*What would be a better color?*/
 }
+
 
 /*Blog post date*/
 p.date {
@@ -65,10 +66,16 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
+
 /*Home page image*/
 .img-container {
     width: 250px;
     height: 300px;
+}
+
+/* Space below books for smaller screens when the rows collapse into stacked columns. */
+.book-container {
+    margin-bottom: 40px;
 }
 
 /*Aspect ratio of 1.45*/
@@ -77,10 +84,7 @@ body {
     height: 319px;
 }
 
-.book-container {
-    margin-bottom: 40px;
-}
-
+/* Should be as wide as image I think.  */
 .book-cover-description {
     max-width: 220px;
 }
