@@ -16,10 +16,6 @@ p.date {
 }
 
 
-/*.blog-title {
-    font-size: small;
-}*/
-
 #my-pagination {
     margin-top: 25px;
     margin-bottom: 25px !important;
@@ -76,7 +72,7 @@ body {
 
 
 /*Home page image*/
-.img-container {
+.img-home-page {
     width: 250px;
     height: 300px;
 }

@@ -18,7 +18,7 @@
 
 {% block nav_extension %}
     <!-- <div class="jumbotron"> -->
-        <h1 class="text-center" style="background-color: aqua; width: 100%;">Welcome!</h1>
+        <h1 class="text-center sticky-top shadow-lg" style="background-color: aqua; width: 100%;">Welcome!</h1>
     <!-- </div> -->
 {% endblock nav_extension %}
 
@@ -33,16 +33,22 @@
             </p>
         </div>
     </div>
-
-    <div class="row" style="background-color:cornflowerblue;">
+    <!-- rounded-pill -->
+    <div class="row rounded-lg bg-secondary">
         <div class="col-md-4 d-flex justify-content-center">
-            <img class="rounded img-fluid img-container" src="{% static 'blog/Images/lsuGraduation.jpg' %}"/>
+            <div style="margin: 10px;">
+                <img class="rounded img-home-page" src="{% static 'blog/Images/lsuGraduation.jpg' %}"/>
+            </div>
         </div>
         <div class="col-md-4 d-flex justify-content-center">
-            <img class="rounded img-fluid img-container" src="{% static 'blog/Images/lsuGraduation.jpg' %}"/>
+            <div style="margin: 10px;">
+                <img class="rounded img-home-page" src="{% static 'blog/Images/lsuGraduation.jpg' %}"/>
+            </div>
         </div>
         <div class="col-md-4 d-flex justify-content-center">
-            <img class="rounded img-fluid img-container" src="{% static 'blog/Images/lsuGraduation.jpg' %}"/>
+            <div style="margin: 10px;">
+                <img class="rounded img-home-page" src="{% static 'blog/Images/lsuGraduation.jpg' %}"/>
+            </div>
         </div>
     </div>
 

@@ -1,0 +1,102 @@
+header {
+    background-color: rgb(179, 224, 255);
+}
+
+.nav-link {
+    color: black !important; /*What would be a better color?*/
+}
+
+/*Blog post date*/
+p.date {
+/*    color: #ccc;*/
+    font-family: georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+}
+
+
+/*.blog-title {
+    font-size: small;
+}*/
+
+.pagination {
+    margin: 25px 0;
+    font-weight: bold;
+}
+
+
+/*I need minimum width sizing for table???*/
+.table-hover tbody tr:hover {
+    background-color: rgb(179, 224, 255);
+}
+
+
+
+/*Make text smaller on smaller screens.*/
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+/*Shouldn't be necessary, but I think bootstrap is overriding it if I just map to body tag*/
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+/*Home page image*/
+.img-container {
+    width: 250px;
+    height: 300px;
+}
+
+/*Aspect ratio of 1.45*/
+.book-image {
+    width: 220px;
+    height: 319px;
+}
+
+.book-container {
+    margin-bottom: 40px;
+}
+
+.book-cover-description {
+    max-width: 220px;
+}
+
+
+/* comments on blog post*/
+.comment {
+    padding: 10px;
+}
+
+    .comment:nth-child(even) {
+        background: #efefef;
+    }
+
+    .comment .info {
+        font-weight: bold;
+        font-size: 12px;
+        color: #666;
+    }
