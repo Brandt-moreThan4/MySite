@@ -50,7 +50,8 @@ class Book(PostBase):
     cover_description = models.TextField()
     image_name = models.TextField()
     blog_display = models.BooleanField(default=False)
-
+    cover_image = models.ImageField(default='Nothing_Yet', upload_to='book_images/')
+    
     # class Meta:
     #     """Sort posts by created date"""
     #     ordering = ('-created',)

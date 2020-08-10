@@ -117,7 +117,6 @@ if DEBUG:
 else:
     STATIC_ROOT = "/home/153144green/MySite/static"
 
-#for python anywhere
-#STATIC_URL = '/static/'
-#STATIC_ROOT = "/home/153144green/MySite/static"
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
