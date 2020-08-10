@@ -1,26 +1,16 @@
-"""
-Django settings for MySite project.
-
-Based on by 'django-admin startproject' using Django 2.1.2.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/2.1/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/2.1/ref/settings/
-"""
 
 import os
+import environ
 import posixpath
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ea1e6bd5-f62a-4595-bd7a-64ebce4555ce'
+# Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

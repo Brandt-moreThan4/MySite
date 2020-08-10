@@ -1,9 +1,0 @@
-comtypes==1.1.7
-Django==2.2.14
-django-taggit==1.2.0
-pip==19.2.3
-pytz==2020.1
-pywin32==228
-setuptools==41.2.0
-sqlparse==0.3.1
-xlwings==0.19.5
