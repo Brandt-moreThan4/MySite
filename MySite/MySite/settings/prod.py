@@ -1,8 +1,8 @@
 from .base import *
 
-DEBUG = True
+DEBUG = False
 
 STATIC_URL = '/static/'
 STATIC_ROOT = "/home/153144green/MySite/static"
 
-ALLOWED_HOSTS = ['153144green.pythonanywhere.com']
+ALLOWED_HOSTS = ['www.funwithbrandt.com']

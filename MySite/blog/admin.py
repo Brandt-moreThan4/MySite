@@ -35,6 +35,5 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('author', 'description')
     list_filter = ('created',)
     search_fields = ('tags', 'description', 'author')
-    prepopulated_fields = {'slug': ('author',)}
     date_hierarchy = 'updated'
     ordering = ('updated', 'created')

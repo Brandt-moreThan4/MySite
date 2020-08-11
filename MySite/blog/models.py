@@ -13,6 +13,7 @@ class PostBase(models.Model):
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateField(auto_now=True)
     tags = TaggableManager()
+    display = models.BooleanField(default=True)
 
     class Meta:
         # abstract = True
@@ -62,6 +63,17 @@ class Book(PostBase):
         return self.book_title
 
 
+    def get_author(self):
+        """Author text is stored like "Last; First" But causes an error if a comma is used instead for storage"""
+        try:
+            named_reversed = self.author.split(';')
+            name_normal = named_reversed[1] + ' ' + named_reversed[0]
+        except:
+            name_normal = 'Author Error'
+        
+        return name_normal.strip()
+
+
     def get_absolute_url(self):
         """Retrieve the absolute url for a book detail"""
 
@@ -91,10 +103,15 @@ class Comment(models.Model):
 class Knowledge(models.Model):
     """Class to model a knowledge record"""
 
-    slug = models.SlugField(max_length=250, unique_for_date='created') 
     author = models.CharField(max_length=500)
     description = models.TextField()
     source = models.TextField()
     tags = models.TextField(default='Placeholder')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
+
+    def tags_as_list(self):
+        try:
+            return self.tags.split(';')
+        except:
+            return ['Error']

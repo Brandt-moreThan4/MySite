@@ -14,8 +14,7 @@
     <br />
     <p>
         My beautiful table of learning. I would love additional entries so hit me up with other sources.
-        This needs heavy refining. At the very least I need much better descriptions. Currently does not filter for
-        keywords which I know is really annoying. I'm working on it.
+        This needs heavy refining. At the very least I need much better descriptions.
     </p>
 
 
@@ -47,12 +46,15 @@
                     <td>{{ knowledge.author }}</td>
                     <td><a href="{{ knowledge.source }}">{{ knowledge.description }}</a></td>
                     <td>
-                        <button class="btn btn-primary btn-sm">
-                            <details>
-                                <summary>{{ knowledge.tags}}</summary>
-                                <div>What should I put here????</div>
-                            </details>
-                        </button>
+                        <form method="get">
+                            {% for tag in knowledge.tags_as_list %}
+                                <button class="badge badge-primary" name="search_box" value="{{ tag }}" style="margin-bottom: 2px;">
+                                    {{ tag }}
+                                </button>
+                            {% endfor %}
+                        </form>
+                        <!-- badge badge-pill badge-primary -->
+                        <!-- btn btn-primary btn-sm -->
                     </td>
                 </tr>
             {% endfor %}

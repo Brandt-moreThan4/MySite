@@ -2,9 +2,15 @@
     color: white !important; /*What would be a better color?*/
 }
 
+/* Colors
+    Original: rgb(179, 224, 255)
+    Naked money: 61, 177, 229
+*/
+
+
 nav {
     margin-bottom:0px !important; /* Make sure nav an extended nav on welcome page have no spacing between */
-    background-color: rgb(179, 224, 255);
+    background-color: rgb(61, 177, 229);
 }
 
 /*Blog post date*/
@@ -19,7 +25,6 @@ p.date {
 #my-pagination {
     margin-top: 25px;
     margin-bottom: 25px !important;
-    /* font-weight: bold; */
 }
 
 
@@ -49,10 +54,9 @@ html {
     min-height: 100%;
 }
 
-/*Shouldn't be necessary, but I think bootstrap is overriding it if I just map to body tag*/
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    margin-bottom: 84px;
 }
 
 .footer {
@@ -88,9 +92,24 @@ body {
     height: 319px;
 }
 
+.book-title {
+    margin-bottom: 10px;
+}
+
+.book-author {
+    /* font-family: georgia, serif;
+    font-size: 14px; */
+    font-style: italic;
+}
+
 /* Should be as wide as image I think.  */
 .book-cover-description {
     max-width: 220px;
+}
+
+.book-post-image{
+    width: 175px;
+    height: 250px;
 }
 
 
@@ -108,3 +127,14 @@ body {
         font-size: 12px;
         color: #666;
     }
+
+
+/* .carousel-image{
+    width: 400px;
+    height: 300px;
+    
+} */
+
+/* .carousel-inner {
+    height: 450px;
+ } */
