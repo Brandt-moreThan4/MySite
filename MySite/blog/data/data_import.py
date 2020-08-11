@@ -5,7 +5,7 @@ import openpyxl
 from ..models import Knowledge, Book, BlogPost
 
 
-IMPORT_PATH = r'C:\Users\15314\OneDrive\Desktop\Web Development\MySite\MySite\blog\data\data_dump\websiteDB.xlsx'
+IMPORT_PATH = r'C:\Users\15314\OneDrive\Desktop\MySite\MySite\blog\data\data_dump\websiteDB.xlsx'
 
 
 def import_knowledge():
@@ -60,11 +60,16 @@ def import_books():
 
 
 def update_books():
-    """This updates the knowledge table keywords based on what's in the spreadsheet. Uses primary key to identify which record to update."""
-    books = Book.objects.all()
-    for record in books:
-        record.body = 'Placeholder'
-        record.save()
+    """This updates the book recs based on primary key"""
+    wb = openpyxl.load_workbook(IMPORT_PATH)
+    sht = wb['Books']
+
+    for i in range(2, get_last_row(sht, 'A') + 1):
+        print(f'I am on excel row: {i} about to alter: {sht["C" + str(i)].value}')
+        id = sht["A" + str(i)].value
+        current_book = Book.objects.get(pk=id)      
+        current_book.author = sht["G" + str(i)].value
+        current_book.save()
 
 
 

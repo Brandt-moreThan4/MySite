@@ -1,7 +1,7 @@
 import csv
 
 
-DUMP_PATH = r'C:\Users\15314\source\repos\MySite\MySite\blog\data\data_dump'
+DUMP_PATH = r'C:\Users\15314\OneDrive\Desktop\MySite\MySite\blog\data\data_dump'
 
 
 def export_db(django_model, csv_path=DUMP_PATH):

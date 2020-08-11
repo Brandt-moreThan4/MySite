@@ -67,11 +67,11 @@ class Book(PostBase):
         """Author text is stored like "Last; First" But causes an error if a comma is used instead for storage"""
         try:
             named_reversed = self.author.split(';')
-            name_normal = named_reversed[1] + ' ' + named_reversed[0]
+            name_normal = named_reversed[1].strip() + ' ' + named_reversed[0].strip()
         except:
             name_normal = 'Author Error'
         
-        return name_normal.strip()
+        return name_normal
 
 
     def get_absolute_url(self):
