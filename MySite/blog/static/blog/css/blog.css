@@ -13,6 +13,7 @@ nav {
     background-color: rgb(61, 177, 229);
 }
 
+
 /*Blog post date*/
 p.date {
 /*    color: #ccc;*/
@@ -66,11 +67,11 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
     background-color: gray;
-    color: rgb(179, 224, 255)
+    color: rgb(61, 177, 229)
 }
 
 #footer-head {
-    background-color:  rgb(179, 224, 255);
+    background-color:  rgb(61, 177, 229);
     height: 24px;
 }
 
@@ -94,13 +95,13 @@ body {
 
 .book-title {
     margin-bottom: 10px;
-}
-
-.book-author {
-    /* font-family: georgia, serif;
-    font-size: 14px; */
     font-style: italic;
 }
+
+/* .book-author {
+
+
+} */
 
 /* Should be as wide as image I think.  */
 .book-cover-description {
@@ -129,12 +130,7 @@ body {
     }
 
 
-/* .carousel-image{
-    width: 400px;
-    height: 300px;
-    
-} */
-
-/* .carousel-inner {
-    height: 450px;
- } */
+.carousel {
+    width: 600px;
+    height: 452px;
+}
