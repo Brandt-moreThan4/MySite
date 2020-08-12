@@ -1,7 +1,7 @@
 ﻿{% extends "blog/base.html" %}
 {% load static %}
 
-{% block title %}My Blog{% endblock %}
+{% block title %}FunWithBrandt-Blog{% endblock %}
 
 {% block content %}
     <h1>Really need a Blog Title</h1>
@@ -26,9 +26,9 @@
                 <br /><br />
 
             {% elif type == 'Book' %}
-                <div class="row">
+                <div>
                     <h4>
-                        <a class="blog-title" href="{{ post.get_absolute_url }}">Book notes for: {{ post.book_title }}</a>
+                        <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.book_title }}</a>
                     </h4>
                     <div class="row">
                         <div class="col-md">

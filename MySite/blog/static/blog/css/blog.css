@@ -2,11 +2,6 @@
     color: white !important; /*What would be a better color?*/
 }
 
-/* Colors
-    Original: rgb(179, 224, 255)
-    Naked money: 61, 177, 229
-*/
-
 
 nav {
     margin-bottom:0px !important; /* Make sure nav an extended nav on welcome page have no spacing between */
@@ -67,7 +62,7 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
     background-color: gray;
-    color: rgb(61, 177, 229)
+    /* color:white; */
 }
 
 #footer-head {
@@ -75,12 +70,6 @@ body {
     height: 24px;
 }
 
-
-/*Home page image*/
-.img-home-page {
-    width: 250px;
-    height: 300px;
-}
 
 /* Space below books for smaller screens when the rows collapse into stacked columns. */
 .book-container {
@@ -129,7 +118,7 @@ body {
         color: #666;
     }
 
-
+/* Roughly matches the size of the images. */
 .carousel {
     width: 600px;
     height: 452px;
