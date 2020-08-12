@@ -27,18 +27,11 @@ def home(request):
     return render(request,'blog/index.html')
 
 
-def post_list(request, tag_slug=None):
+def post_list(request):
     """Displays the posts."""
 
     blog_posts = BlogPost.objects.all()
-    books = Book.objects.exclude(post_body='Placeholder')
-
-    tag = None
-
-    if tag_slug:
-        tag = get_object_or_404(Tag, slug=tag_slug)
-        blog_posts = blog_posts.filter(tags__in=[tag])
-        books = books.filter(tags__in=[tag])
+    books = Book.objects.exclude(blog_display=False)
 
     posts_and_books = list(blog_posts) + list(books)
     posts_and_books.sort(reverse=True, key=lambda model: model.created)
@@ -61,7 +54,7 @@ def post_list(request, tag_slug=None):
         # If the page is out of range deliver the last page of results.
         all_posts = paginator.page(paginator.num_pages)
 
-    return render(request, 'blog/post/list.html', {'all_posts': all_posts, 'tag': tag})
+    return render(request, 'blog/post/list.html', {'all_posts': all_posts})
 
 
 def post_detail(request, year, month, day, post):
@@ -156,14 +149,8 @@ def knowledge_repo(request):
     if search_term == '':
         knowledge_list = Knowledge.objects.all()
     else:
-        #Does not filter for tags that well. I shoudl change the tags back to strings
         knowledge_list = Knowledge.objects.filter(Q(author__icontains=search_term) | Q(description__icontains=search_term)| Q(tags__icontains=search_term))
 
-    #all_tags= []
-    #for rec in knowledge_list:
-    #    tags = rec.tags
-    #    split_tags = tags.split(';')
-    #    all_tags.append(split_tags)
 
     return render(request, 'blog/knowledge_repo.html', {'knowledge_list': knowledge_list})
 

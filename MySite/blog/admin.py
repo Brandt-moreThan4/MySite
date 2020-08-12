@@ -25,7 +25,7 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ('book_title', 'author')
     list_filter = ('created',)
     search_fields = ('book_title', 'post_body', 'author')
-    prepopulated_fields = {'slug': ('book_title',)}
+    prepopulated_fields = {'slug': ('book_title',), 'post_title': ('book_title',), 'post_body': ('book_title',)}
     date_hierarchy = 'updated'
     ordering = ('updated', 'created')
 

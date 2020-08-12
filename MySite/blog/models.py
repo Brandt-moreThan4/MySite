@@ -12,7 +12,6 @@ class PostBase(models.Model):
     post_body = models.TextField()
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateField(auto_now=True)
-    tags = TaggableManager()
     display = models.BooleanField(default=True)
 
     class Meta:
@@ -48,8 +47,6 @@ class Book(PostBase):
     """Class to model book data"""
     book_title = models.CharField(max_length=300)    
     author = models.CharField(max_length=300)
-    cover_description = models.TextField()
-    image_name = models.TextField()
     blog_display = models.BooleanField(default=False)
     cover_image = models.ImageField(default='Nothing_Yet', upload_to='book_images/')
     
