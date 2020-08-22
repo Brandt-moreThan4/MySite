@@ -23,7 +23,7 @@ class Post(models.Model):
     def get_absolute_url(self):
         """Retrieve the absolute url for a post"""
         # I do not understand how this works.
-        return reverse('blog:post_detail',
+        return reverse('scrapey:post_detail',
                        args=[self.date.year,
                              self.date.month,
                              self.date.day,

@@ -8,26 +8,30 @@
     <br /><br /><br />
 
 
-    <div class="col-md-9">
+    <div class="col-lg-9">
 
-        {% for post, type in all_posts %}
+        {% for post in posts %}
            
-                <div>
-                    <h4>
-                        <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.post_title }}</a>
-                    </h4>
+                <div class="row">
+                        <div class="col-xs-2">
+                            <img style="width: 75px; height: 75px;" src="../../static/scrapey/images/blog_logos/stratechery.png">
+                        </div>
+                        <div class="col">
+                            <h4>
+                                <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            </h4>
 
-                    <p class="date">
-                        Created on {{ post.created|date:"DATE_FORMAT" }}
-                    </p>
-
-                    {{ post.post_body|truncatewords:75|linebreaks }}
+                            <p>
+                                <span class="date">Created on {{ post.date|date:"DATE_FORMAT" }}</span>
+                                <span> by {{ post.author }}</span>
+                            </p>
+                        </div>       
                 </div>
                 <br /><br />
 
         {% endfor %}
     
-        {% include "pagination.html" with page=all_posts %}    
+        <!-- {% include "pagination.html" with page=all_posts %}     -->
     </div>
 {% endblock %}
 
