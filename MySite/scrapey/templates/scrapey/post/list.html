@@ -1,0 +1,33 @@
+﻿{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}FunWithBrandt-External Blog{% endblock %}
+
+{% block content %}
+    <h1>External Post</h1>
+    <br /><br /><br />
+
+
+    <div class="col-md-9">
+
+        {% for post, type in all_posts %}
+           
+                <div>
+                    <h4>
+                        <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.post_title }}</a>
+                    </h4>
+
+                    <p class="date">
+                        Created on {{ post.created|date:"DATE_FORMAT" }}
+                    </p>
+
+                    {{ post.post_body|truncatewords:75|linebreaks }}
+                </div>
+                <br /><br />
+
+        {% endfor %}
+    
+        {% include "pagination.html" with page=all_posts %}    
+    </div>
+{% endblock %}
+

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.blogConfig',
+    'scrapey.apps.ScrapeyConfig',
     'taggit',
 ]
 

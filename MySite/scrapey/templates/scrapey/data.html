@@ -1,0 +1,36 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Data{% endblock %}
+
+{% block content %}
+     <h1>Data Importing </h1>
+     <br /><br />
+           
+
+
+    <div class="row">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} 
+            <div class="row">
+                <div class="col">
+                    <div class="btn-group">
+                        <button type="submit" value="sql" name="Button" class="btn btn-primary">Import sql</button><br /><br />
+                        <!-- <button type="submit" value="lol" name="Button" class="btn btn-info">lol</button><br /><br />
+                        <button type="submit" value="haha" name="Button" class="btn btn-secondary">haha</button>        -->
+                    </div>
+                </div>
+            </div>
+
+        </form>  
+    </div>
+
+    {% endblock %}
+
+
+
+
+
+
+
+
+   

@@ -112,3 +112,6 @@ class Knowledge(models.Model):
             return self.tags.split(';')
         except:
             return ['Error']
+
+
+

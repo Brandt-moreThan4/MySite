@@ -15,7 +15,7 @@ def import_knowledge():
 
     wb = openpyxl.load_workbook(IMPORT_PATH)
     sht = wb['Knowledge']
-
+    
     for i in range(2, get_last_row(sht, 'B') + 1):
         new_knowledge = Knowledge()
         new_knowledge.author = sht["B" + str(i)].value
@@ -99,4 +99,5 @@ def get_last_row(sht, column='A'):
     while sht[f'{column}{row}'].value is not None:
         row += 1
     return row - 1
+
 

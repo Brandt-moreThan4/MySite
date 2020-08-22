@@ -8,7 +8,7 @@ def export_db(django_model, csv_path=DUMP_PATH):
     """Export the entire django model table to a csv file saved in the data dump folder"""
 
     all_data = convert_django_model_to_lists(django_model)
-
+    
     # file name is just the same name as the model. So Book model will be 'Book.csv' 
     csv_path = csv_path + '\\' + django_model.__name__ + '.csv'
     write_to_csv(all_data, csv_path)

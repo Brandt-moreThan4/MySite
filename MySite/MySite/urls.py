@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('blog.urls', namespace='blog')),
+    path('blog-external/', include('scrapey.urls', namespace='scrapey')),
     path('manage/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

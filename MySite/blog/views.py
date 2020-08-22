@@ -10,13 +10,13 @@ from .data import data_import, data_export
 
 # Below prints convenient links to urls for debugging purposes
 
-print('http://127.0.0.1:8000/admin')
-print('http://127.0.0.1:8000/knowledge-repo')
-print('http://127.0.0.1:8000/data')
+# print('http://127.0.0.1:8000/admin')
+# print('http://127.0.0.1:8000/knowledge-repo')
+# print('http://127.0.0.1:8000/data')
 print('http://127.0.0.1:8000')
-print('http://127.0.0.1:8000/blog')
-print('http://127.0.0.1:8000/books')
-print('http://127.0.0.1:8000/visuals')
+# print('http://127.0.0.1:8000/blog')
+# print('http://127.0.0.1:8000/books')
+# print('http://127.0.0.1:8000/visuals')
 
 
 
@@ -164,6 +164,8 @@ def data_play(request):
         # First three are exporting of different data
         if request.POST.get('Book'):            
             data_export.export_db(Book)
+        elif request.POST.get('sql_import'):            
+            data_import.import_sql()
         elif request.POST.get('Blog'):
             data_export.export_db(Post)
         elif request.POST.get('Knowledge'):
