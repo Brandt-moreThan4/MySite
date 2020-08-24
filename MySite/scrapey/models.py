@@ -30,6 +30,43 @@ class Post(models.Model):
                              self.slug])
 
 
+    def get_template_name(self) -> str:
+        """Return the name of the appropriate html template to render for the detail view."""
+
+        if self.name == 'Aswath Damodaron Blog':
+            return 'aswath.html'
+        elif self.name == 'Eugene Wei Blog':
+            return 'eugene.html'
+        elif self.name == 'Stratechery':
+            return 'stratechery.html'
+        elif self.name == 'Collaborative Fund':
+            return 'collab.html'
+        elif self.name == 'OSAM':
+            return 'OSAM.html'
+        elif self.name == 'Amnesia':
+            return 'amnesia.html'
+        elif self.name == 'Gates Notes':
+            return 'gates.html'
+
+    def get_logo(self) -> str:
+        """Return the string logo path for the post""" 
+        if self.name == 'Aswath Damodaron Blog':
+            return '../../static/scrapey/images/blog_logos/Aswath.jpg'
+        elif self.name == 'Eugene Wei Blog':
+            return '../../static/scrapey/images/blog_logos/stratechery.png'
+        elif self.name == 'Stratechery':
+            return '../../static/scrapey/images/blog_logos/stratechery.png'
+        elif self.name == 'Collaborative Fund':
+            return '../../static/scrapey/images/blog_logos/collaborative.png'
+        elif self.name == 'OSAM':
+            return '../../static/scrapey/images/blog_logos/OSAM.png'
+        elif self.name == 'Amnesia':
+            return '../../static/scrapey/images/blog_logos/amnesiay.jpg'
+        elif self.name == 'Gates Notes':
+            return '../../static/scrapey/images/blog_logos/gates.jpg'
+
+        
+
     class Meta:
         ordering = ('-date',)
 

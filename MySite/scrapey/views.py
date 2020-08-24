@@ -5,28 +5,26 @@ from .data import data_import
 from .models import Post
 
 
-# print('http://127.0.0.1:8000')
 print('http://127.0.0.1:8000/blog-external/')
-print('http://127.0.0.1:8000/blog-external/data/')
 
 
 
 def post_list(request):
     """Displays the posts."""
 
-    blog_posts = Post.objects.all()[:15]
+    blog_posts = Post.objects.all()
 
-    # paginator = Paginator(all_posts, 7) 
-    # page = request.GET.get('page') # Look at paginator template to see how this value would be set.
+    paginator = Paginator(blog_posts, 7) 
+    page = request.GET.get('page') 
    
-    # try:
-    #     all_posts = paginator.page(page)
-    # except PageNotAnInteger:
-    #     # If the page is not an integer then deliver the first page.
-    #     all_posts = paginator.page(1)
-    # except EmptyPage:
-    #     # If the page is out of range deliver the last page of results.
-    #     all_posts = paginator.page(paginator.num_pages)
+    try:
+        blog_posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page is not an integer then deliver the first page.
+        blog_posts = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range deliver the last page of results.
+        blog_posts = paginator.page(paginator.num_pages)
 
     return render(request, 'scrapey/post/list.html', {'posts': blog_posts})
 
@@ -42,8 +40,9 @@ def post_detail(request, year, month, day, post):
                                    date__month=month,
                                    date__day=day)
     
+    template_name = post.get_template_name()
 
-    return render(request, 'scrapey/post/detail.html', {'post': post})
+    return render(request, 'scrapey/post/detail/' + template_name , {'post': post})
 
 
 

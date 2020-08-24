@@ -14,7 +14,7 @@
            
                 <div class="row">
                         <div class="col-xs-2">
-                            <img style="width: 75px; height: 75px;" src="../../static/scrapey/images/blog_logos/stratechery.png">
+                            <img style="width: 125px; height: 125px;" src="{{ post.get_logo }}">
                         </div>
                         <div class="col">
                             <h4>
@@ -30,8 +30,9 @@
                 <br /><br />
 
         {% endfor %}
-    
-        <!-- {% include "pagination.html" with page=all_posts %}     -->
+        
+        {% include "pagination.html" with page=posts %}  
+       
     </div>
 {% endblock %}
 

@@ -1,12 +1,13 @@
-﻿{% extends "blog/base.html" %}
+{% extends "blog/base.html" %}
 
 {% block title %}FunWithBrandt-ExternalPosts{% endblock %}
 
 {% block content %}
-    
-    <div class="col-md-9">
-        <h1>{{ post.title}}</h1>
+    <br>
 
+    {% include "scrapey/post/detail/base.html" with post=post %}  
+    <br>
+    <div class="col-md-9">
         <p>
             {{ post.body|safe }}
         </p>

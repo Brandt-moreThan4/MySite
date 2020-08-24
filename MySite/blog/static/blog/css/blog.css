@@ -17,6 +17,13 @@ p.date {
     font-style: italic;
 }
 
+.date {
+    /*    color: #ccc;*/
+        font-family: georgia, serif;
+        font-size: 14px;
+        font-style: italic;
+    }
+
 
 #my-pagination {
     margin-top: 25px;

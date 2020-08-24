@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+
+{% block title %}FunWithBrandt-ExternalPosts{% endblock %}
+
+{% block content %}
+    <br>
+
+    {% include "scrapey/post/detail/base.html" with post=post %}  
+    <br>
+    <div class="col-md-9">
+        <h1>{{ post.title }}</h1> 
+        <p>
+            <span class="date">{{ post.date|date:"DATE_FORMAT" }}</span>
+            <span> by {{ post.author }}</span>
+        </p>
+        <br>
+        <p>
+            {{ post.body|safe }}
+        </p>
+   
+    </div>
+
+{% endblock %}
