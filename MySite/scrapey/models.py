@@ -61,7 +61,7 @@ class Post(models.Model):
         elif self.name == 'OSAM':
             return '../../static/scrapey/images/blog_logos/OSAM.png'
         elif self.name == 'Amnesia':
-            return '../../static/scrapey/images/blog_logos/amnesiay.jpg'
+            return '../../static/scrapey/images/blog_logos/amnesia.jpg'
         elif self.name == 'Gates Notes':
             return '../../static/scrapey/images/blog_logos/gates.jpg'
 

@@ -4,9 +4,58 @@
 {% block title %}FunWithBrandt-External Blog{% endblock %}
 
 {% block content %}
-    <h1>External Post</h1>
-    <br /><br /><br />
 
+    <br />
+    <!-- Only show this header info on the first page. Paginator sets the posts.number attribute I think. -->
+    {% if posts.number == 1 %}
+        <div >
+            <br>
+            <p>
+                The following is an aggregated list of blogs that I enjoy which should update continuously as the 
+                authors put out more content. I just wanted to have one place to go to look for any new articles instead
+                of checking each of their websites separately.
+            </p>
+
+            <p>
+                Below is a list of the sites currently included here. Hopefully I will add a filter 
+                and search functionality at some point.
+            </p>
+            <br>
+            <h2 class="text-center">
+                Currently Represented
+            </h2 class="text-center">
+            <div class="row">
+                <div class="col-4 col-md-3">
+                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/Aswath.jpg" alt="Sorry, trouble with this image">
+                    <div>Aswath Damodaron's Blog</div>
+                </div>
+                <div class="col-4 col-md-3">
+                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/stratechery.png" alt="Sorry, trouble with this image">
+                    <div>Stratecehry</div>
+                </div>
+                <div class="col-4 col-md-3">
+                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/collaborative.png" alt="Sorry, trouble with this image">
+                    <div>Collaborative Fund</div>
+                </div>
+                <div class="col-4 col-md-3">
+                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/OSAM.png" alt="Sorry, trouble with this image">
+                    <div>O'Shaughnessy Asset Management</div>
+                </div>
+                <div class="col-4 col-md-3">
+                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/gates.jpg" alt="Sorry, trouble with this image">
+                    <div>Bill Gates Blog</div>
+                </div>
+                <div class="col-4 col-md-3">
+                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/amnesia.jpg" alt="Sorry, trouble with this image">
+                    <div>Investor Amnesia</div>
+                </div>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+    <br /><br /><br />
 
     <div class="col-lg-9">
 
@@ -14,7 +63,7 @@
            
                 <div class="row">
                         <div class="col-xs-2">
-                            <img style="width: 125px; height: 125px;" src="{{ post.get_logo }}">
+                            <img style="width: 100px; height: 75px;" src="{{ post.get_logo }}">
                         </div>
                         <div class="col">
                             <h4>
