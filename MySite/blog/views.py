@@ -185,31 +185,26 @@ def data_play(request):
     return render(request, 'blog/data_import.html')
 
 
-def post_share(request, post_id):
-    """Sharing a post via email. This view handles both the processing of get request and post.
-    Currently there is no link on blog detail page to get to this. Need to fiddle with email stuff more first."""
 
-    post = get_object_or_404(Post, id=post_id)
-    sent = False
+# def post_share(request, post_id):
+#     """Sharing a post via email. This view handles both the processing of get request and post.
+#     Currently there is no link on blog detail page to get to this. Need to fiddle with email stuff more first."""
 
-    if request.method =='POST':
-        form = EmailPostForm(request.POST)
-        if form.is_valid():
-            form_data = form.cleaned_data
-            post_url = request.build_absolute_uri(
-                post.get_absolute_url())
-            subject = f"Yo. {form_data['name']} thinks you should read this post: {post.title}"
-            message = f"Read that shit at {post_url} \n\n My comments: {form_data['comments']}" # I have not tested after adding this line yet
-            send_mail(subject, message, 'brandtgreen97@gmail.com', [form_data['to']])
-            sent = True
-    else:
-        form = EmailPostForm()
+#     post = get_object_or_404(Post, id=post_id)
+#     sent = False
 
-    return render(request, 'blog/post/share.html', {'post': post, 'form': form, 'sent': sent})
+#     if request.method =='POST':
+#         form = EmailPostForm(request.POST)
+#         if form.is_valid():
+#             form_data = form.cleaned_data
+#             post_url = request.build_absolute_uri(
+#                 post.get_absolute_url())
+#             subject = f"Yo. {form_data['name']} thinks you should read this post: {post.title}"
+#             message = f"Read that shit at {post_url} \n\n My comments: {form_data['comments']}" # I have not tested after adding this line yet
+#             send_mail(subject, message, 'brandtgreen97@gmail.com', [form_data['to']])
+#             sent = True
+#     else:
+#         form = EmailPostForm()
 
+#     return render(request, 'blog/post/share.html', {'post': post, 'form': form, 'sent': sent})
 
-
-def visuals(request):
-        """The home page for visualizations"""
-
-        return render(request, 'blog/Visuals/Visuals.html')
