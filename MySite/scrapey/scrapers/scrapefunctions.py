@@ -3,6 +3,7 @@ from selenium import webdriver
 import requests
 import time
 import string
+from pathlib import Path
 
 
 def get_soup(url: str):
@@ -47,7 +48,7 @@ def get_page_response(url):
 def get_chrome_driver():
     """Returns a selenium driver object to manipulate chrome"""
 
-    driver_path = r'chromedriver.exe'
+    driver_path = Path(__file__).parent / 'chromedriver.exe'
     options = webdriver.chrome.options.Options()
     options.set_headless(headless=True)
     try:
