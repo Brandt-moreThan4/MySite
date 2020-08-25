@@ -548,13 +548,36 @@ class OSAMScraper(SiteScrapper):
         return new_post
 
 
-class AmnesiaScraper():
+class AmnesiaScraper(SiteScrapper):
     """Inherits from . Implements specific functionality for scrapeing Aswath's website."""
 
     ROOT_URL = 'https://investoramnesia.com'
     BLOG_HOME = 'https://investoramnesia.com/category/sunday-reads'
 
     NAME = 'Amnesia'
+
+    def __init__(self):
+        """Only thing this does, is to populate the most_recent_post variable which contains a models.Post object."""
+        self.most_recent_post = Post.objects.filter(name=self.NAME).latest('date')
+
+
+    def get_new_posts(self):
+        """Check the front page for any new posts and download those if they are newer than the newest in the db."""
+
+        page_soup = sf.get_soup(self.BLOG_HOME)
+        posts_on_page = page_soup.find_all(class_='post-content')
+        new_posts = [self.build_post(post_soup) for post_soup in posts_on_page 
+                    if not self.is_in_db(post_soup) ]
+        
+        self.add_posts_to_db(new_posts)
+
+    def is_in_db(self, post_soup):
+        """Test if it is in the db by seeing if a post with that url is already in there somewhere."""
+        post_url = post_soup.a['href']
+        query = Post.objects.filter(url=post_url, name=self.NAME)
+        # Empty queries will evaluate to false
+        return bool(query)
+
 
     def get_historical_posts(self):
         """Scrape all historical posts."""
@@ -587,7 +610,6 @@ class AmnesiaScraper():
     def build_post(self, post_soup: BeautifulSoup) -> Posty:
         """Send in the soup of a post and spit out one of my post objects"""
         new_post = Posty()
-        self.count += 1
         new_post.url = post_soup.a['href']
 
         page_soup = sf.get_soup(new_post.url)
@@ -601,16 +623,41 @@ class AmnesiaScraper():
         return new_post
 
 
-class GatesScraper():
+class GatesScraper(SiteScrapper):
     ROOT_URL = 'https://www.gatesnotes.com'
     BLOG_HOME = 'https://www.gatesnotes.com/All'
 
     # Name should be same as name of posts.name that are created. This is used for sql queries later.
     NAME = 'Gates Notes'
 
-    # Declaring it up here so that all methods can use the chrome driver after it has been created.
-    # This feels sloppy though?
-    driver = None
+    def __init__(self):
+        """Only thing this does, is to populate the most_recent_post variable which contains a models.Post object.
+            and get the chrome driver up and running.
+        """
+        self.most_recent_post = Post.objects.filter(name=self.NAME).latest('date')
+        # Declaring it up here so that all methods can use the chrome driver after it has been created.
+        self.driver = sf.get_chrome_driver()
+
+    def get_new_posts(self):
+        """Check the front page for any new posts and download those if they are newer than the newest in the db."""
+
+        self.driver.get(self.BLOG_HOME)
+        time.sleep(4) # Sleep to make sure the page is fully loaded.
+        page_soup = BeautifulSoup(self.driver.page_source)
+        posts_on_page = page_soup.find_all(class_='TGN_site_ArticleItemSearchThumb')
+        new_posts = [self.build_post(post_soup) for post_soup in posts_on_page 
+                    if not self.is_in_db(post_soup)]
+        
+        self.add_posts_to_db(new_posts)
+
+
+    def is_in_db(self, post_soup):
+        """Test if it is in the db by seeing if a post with that url is already in there somewhere."""
+        post_url = self.ROOT_URL + post_soup.a['href']
+        query = Post.objects.filter(url=post_url, name=self.NAME)
+        # Empty queries will evaluate to false
+        return bool(query)
+
 
     def get_historical_posts(self):
         """Only gets the posts on the first page. More post don't appear unless you scroll down to
@@ -658,6 +705,7 @@ class GatesScraper():
         new_post.body = str(page_soup.find(class_='TGN_site_Articlecollumn'))
         new_post.website = self.ROOT_URL
         new_post.name = 'Gates Notes'
+        time.sleep(1)
 
         return new_post
 

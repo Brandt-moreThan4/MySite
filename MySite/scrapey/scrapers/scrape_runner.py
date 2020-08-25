@@ -8,7 +8,7 @@ def scrape_new_data():
     # scrapers = (AswathScraper(), EugeneScraper(), StratecheryScraper(), CollaborativeScraper(),
     # OSAMScraper(), AmnesiaScraper(), GatesScraper())
 
-    scrapers = (OSAMScraper(), )
+    scrapers = (GatesScraper(), )
     # scrapers = []
 
     for scraper in scrapers:
