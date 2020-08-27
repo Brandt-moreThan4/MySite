@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'blog.apps.blogConfig',
     'scrapey.apps.ScrapeyConfig',
     'taggit',
+    'rest_framework',
 ]
 
 # Middleware framework
