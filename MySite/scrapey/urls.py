@@ -1,9 +1,9 @@
 from django.urls import path, include
 from . import views
 from rest_framework import routers
+# from blog.models import BlogPost
 
 app_name = 'scrapey'
-
 
 router = routers.DefaultRouter()
 router.register(r'posts', views.PostViewSet)
