@@ -6,6 +6,7 @@ from rest_framework import routers
 app_name = 'scrapey'
 
 urlpatterns = [
-    path('data/', views.data_play, name='post_list' ),
+
+    path('', views.post_list,),
     path('blog-external/<int:year>/<int:month>/<int:day>/<slug:post>/', views.post_detail, name='post_detail' ),
     ]
