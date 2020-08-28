@@ -22,7 +22,7 @@ class SiteScrapper():
         for posty in posts:    
             try:    
                 new_post = Post()
-                new_post.date = posty.date
+                new_post.date = posty.date # I believe django model needs either a date or datetime object
                 new_post.title = posty.title
                 new_post.author = posty.author
                 new_post.body = posty.body
@@ -55,7 +55,6 @@ class Posty:
 
     @property
     def date(self):
-        # Should return as a string
         return self._date
     
     @date.setter
@@ -79,7 +78,7 @@ class Posty:
 
 
 class AswathScraper(SiteScrapper):
-    """Inherits from . Implements specific functionality for scrapeing Aswath's website."""
+    """Implements specific functionality for scraping Aswath's website."""
     ROOT_URL = 'http://aswathdamodaran.blogspot.com'
     BLOG_HOME = 'http://aswathdamodaran.blogspot.com'
 
@@ -90,7 +89,7 @@ class AswathScraper(SiteScrapper):
     def __init__(self):
         """Only thing this does, is to populate the most_recent_post variable which contains a models.Post object."""
         self.most_recent_post = Post.objects.filter(name=self.NAME).latest('date')
-
+        # I'll need to change this to get the info from my api?
 
     def get_new_posts(self):
         """Check the front page for any new posts and download those if they are newer than the newest in the db."""
@@ -102,7 +101,31 @@ class AswathScraper(SiteScrapper):
         
         self.add_posts_to_db(new_posts)
 
+    @staticmethod
+    def get_post_date(post_soup):
+        """Give the post soup and return a datetime.date object witht he post date. If 
+            you can't get the date for some reason or can't parse it then just return a date of 1/1/1
+            so it will be obvious something is screwey if it gets into the db, but most likely will not 
+            get in since it only pulls in new posts."""
 
+        try:
+            date_string = post_soup.parent.parent.find(class_='date-header').text.strip()
+            return parse(date_string).date()
+        except:
+            return datetime.date(1,1,1)
+
+    def build_post(self, post_soup):
+        """Send in the soup of a post and spit out one of my post objects"""
+        new_post = Posty()
+        new_post.date = self.get_post_date(post_soup)
+        new_post.title = post_soup.find(class_='post-title').text.strip()
+        new_post.author = 'Aswath Damodaron'
+        new_post.body = new_post.body = str(post_soup)
+        new_post.url = post_soup.find(class_='post-title').a.get('href')
+        new_post.website = self.ROOT_URL
+        new_post.name = 'Aswath Damodaron Blog'
+
+        return new_post
 
     def get_historical_posts(self):
         """Scrape all historical posts."""
@@ -129,42 +152,14 @@ class AswathScraper(SiteScrapper):
         if self.page_is_valid(page_soup):
             return [self.build_post(post_soup) for post_soup in page_soup.find_all(class_='post-outer')]
 
-
-    @staticmethod
-    def get_post_date(post_soup):
-        """Give the post soup and return a datetime.date object witht he post date. If 
-            you can't get the date for some reason or can't parse it then just return a date of 1/1/1
-            so it will be obvious something is screwey if it gets into the db, but most likely will not 
-            get in since it only pulls in new posts."""
-
-        try:
-            date_string = post_soup.parent.parent.find(class_='date-header').text.strip()
-            return parse(date_string).date()
-        except:
-            return datetime.date(1,1,1)
-
-
     @staticmethod
     def page_is_valid(page_soup):
         """Give the whole soup on the page and returns True if it contains at least one post on the page."""
         return page_soup.find(class_='post-body') is not None
 
-    def build_post(self, post_soup):
-        """Send in the soup of a post and spit out one of my post objects"""
-        new_post = Posty()
-        new_post.date = self.get_post_date(post_soup)
-        new_post.title = post_soup.find(class_='post-title').text.strip()
-        new_post.author = 'Aswath Damodaron'
-        new_post.body = new_post.body = str(post_soup)
-        new_post.url = post_soup.find(class_='post-title').a.get('href')
-        new_post.website = self.ROOT_URL
-        new_post.name = 'Aswath Damodaron Blog'
-
-        return new_post
-
 
 class EugeneScraper(SiteScrapper):
-    """Inherits from . Implements specific functionality for scrapeing Aswath's website."""
+    """Fun stuff"""
 
     ROOT_URL = 'https://www.eugenewei.com'
     BLOG_HOME = ROOT_URL
@@ -200,35 +195,6 @@ class EugeneScraper(SiteScrapper):
         except:
             return datetime.date(1,1,1)
 
-    def get_historical_posts(self):
-        """Scrape all historical posts."""
-
-        current_url = self.BLOG_HOME
-
-        while current_url is not None:
-            print(f'Getting soup for {current_url}')
-            page_soup = sf.get_soup(current_url)
-            if self.page_is_valid(page_soup):
-                posts_on_page = self.get_posts_on_page(page_soup)
-                self.add_posts_to_db(posts_on_page)
-                time.sleep(15)
-            else:
-                print(f'Page is not valid for {current_url}')
-
-            try:
-                current_url = self.ROOT_URL + page_soup.find(id='nextLink')['href']
-            except:
-                current_url = None
-
-    @staticmethod
-    def page_is_valid(page_soup):
-        """Give the whole soup on the page and returns True if it contains at least one post on the page."""
-        return page_soup.find(class_='post') is not None
-
-    def get_posts_on_page(self, page_soup):
-        """Given a url, extract all the post on the page."""
-
-        return [self.build_post(post_soup) for post_soup in page_soup.find_all(class_='post')]
 
     def build_post(self, post_soup):
         """Send in the soup of a post and spit out one of my post objects"""
@@ -273,6 +239,37 @@ class EugeneScraper(SiteScrapper):
         else:
             return ''
 
+    def get_historical_posts(self):
+        """Scrape all historical posts."""
+
+        current_url = self.BLOG_HOME
+
+        while current_url is not None:
+            print(f'Getting soup for {current_url}')
+            page_soup = sf.get_soup(current_url)
+            if self.page_is_valid(page_soup):
+                posts_on_page = self.get_posts_on_page(page_soup)
+                self.add_posts_to_db(posts_on_page)
+                time.sleep(15)
+            else:
+                print(f'Page is not valid for {current_url}')
+
+            try:
+                current_url = self.ROOT_URL + page_soup.find(id='nextLink')['href']
+            except:
+                current_url = None
+
+    @staticmethod
+    def page_is_valid(page_soup):
+        """Give the whole soup on the page and returns True if it contains at least one post on the page."""
+        return page_soup.find(class_='post') is not None
+
+    def get_posts_on_page(self, page_soup):
+        """Given a url, extract all the post on the page."""
+
+        return [self.build_post(post_soup) for post_soup in page_soup.find_all(class_='post')]
+
+
 
 class StratecheryScraper(SiteScrapper):
     ROOT_URL = 'https://stratechery.com/'
@@ -313,6 +310,28 @@ class StratecheryScraper(SiteScrapper):
             return datetime.date(1,1,1)
 
 
+    def build_post(self, post_soup):
+        """Send in the soup of a post and spit out one of my post objects"""
+
+        new_post = Posty()
+        new_post.date = self.get_post_date(post_soup)
+        new_post.title = post_soup.h1.text
+        new_post.author = 'Ben Thompson'
+        new_post.url = post_soup.a['href']
+        new_post.body = self.get_content(new_post.url)
+        new_post.website = self.ROOT_URL
+        new_post.name = 'Stratechery'
+        # Remember to try not be a dick!
+        time.sleep(3)
+        return new_post
+
+    def get_content(self, post_url):
+        self.driver.get(post_url)
+        page_soup = BeautifulSoup(self.driver.page_source)
+
+        return str(page_soup.article)
+
+
     def get_historical_posts(self):
         """Scrape all historical posts."""
 
@@ -338,26 +357,6 @@ class StratecheryScraper(SiteScrapper):
 
         return [self.build_post(post_soup) for post_soup in page_soup.find_all('article')]
 
-    def build_post(self, post_soup):
-        """Send in the soup of a post and spit out one of my post objects"""
-
-        new_post = Posty()
-        new_post.date = self.get_post_date(post_soup)
-        new_post.title = post_soup.h1.text
-        new_post.author = 'Ben Thompson'
-        new_post.url = post_soup.a['href']
-        new_post.body = self.get_content(new_post.url)
-        new_post.website = self.ROOT_URL
-        new_post.name = 'Stratechery'
-        # Remember to try not be a dick!
-        time.sleep(3)
-        return new_post
-
-    def get_content(self, post_url):
-        self.driver.get(post_url)
-        page_soup = BeautifulSoup(self.driver.page_source)
-
-        return str(page_soup.article)
 
 
 class CollaborativeScraper(SiteScrapper):
@@ -365,7 +364,6 @@ class CollaborativeScraper(SiteScrapper):
     BLOG_HOME = 'https://www.collaborativefund.com/blog/archive'
 
     NAME = 'Collaborative Fund'
-
 
     def __init__(self):
         """Only thing this does, is to populate the most_recent_post variable which contains a models.Post object.
@@ -376,15 +374,52 @@ class CollaborativeScraper(SiteScrapper):
         self.driver = sf.get_chrome_driver()
 
     def get_new_posts(self):
-        """Check the front page for any new posts and download those if they are newer than the newest in the db."""
+        """Check the front page for any new posts and download those if they are newer than the newest in the db.
+            Also get that driver cranked up.
+        """
 
         self.driver.get(self.BLOG_HOME)
         page_soup = BeautifulSoup(self.driver.page_source)
-        posts_on_page = page_soup.find_all(class_='post-item')[:15] # Only look at the most rescent 15
+        posts_on_page = page_soup.find_all(class_='post-item')[:15] # Only look at the most recent 15
         new_posts = [self.build_post(post_soup) for post_soup in posts_on_page 
                     if self.get_post_date(post_soup) > self.most_recent_post.date]
         
         self.add_posts_to_db(new_posts)
+
+    def build_post(self, post_soup):
+        """Send in the soup of a post and spit out one of my post objects"""
+        new_post = Posty()
+        new_post.date = self.get_post_date(post_soup)
+        new_post.title = post_soup.h4.text
+        new_post.author = post_soup.find(class_='js-author').text
+        new_post.url = self.ROOT_URL + post_soup.a['href']
+        new_post.body = self.get_content(new_post.url)
+        new_post.website = self.ROOT_URL
+        new_post.name = 'Collaborative Fund'
+        time.sleep(3)
+        return new_post
+
+    def get_content(self, post_url):
+        self.driver.get(post_url)
+        page_soup = BeautifulSoup(self.driver.page_source)
+        CollaborativeScraper.clean_images(page_soup.article)
+        return str(page_soup.article)
+
+    @staticmethod
+    def clean_images(post_soup):
+        images = post_soup.find_all('img')
+        for image in images:
+            image.attrs = {'src': CollaborativeScraper.get_image_src(image),
+                           'alt': 'Sorry Brandt screwed up this image somehow.',
+                           'class': 'img-fluid'}
+
+    @staticmethod
+    def get_image_src(img_tag) -> str:
+        """Hopefully get a valid url for the picture to use as the src"""
+        try:
+            return CollaborativeScraper.ROOT_URL + img_tag['src']
+        except:
+            return ''
 
     @staticmethod
     def get_post_date(post_soup):
@@ -427,40 +462,6 @@ class CollaborativeScraper(SiteScrapper):
 
         return [post_soup for post_soup in page_soup.find_all(class_='post-item')]
 
-    def build_post(self, post_soup):
-        """Send in the soup of a post and spit out one of my post objects"""
-        new_post = Posty()
-        new_post.date = self.get_post_date(post_soup)
-        new_post.title = post_soup.h4.text
-        new_post.author = post_soup.find(class_='js-author').text
-        new_post.url = self.ROOT_URL + post_soup.a['href']
-        new_post.body = self.get_content(new_post.url)
-        new_post.website = self.ROOT_URL
-        new_post.name = 'Collaborative Fund'
-        time.sleep(3)
-        return new_post
-
-    def get_content(self, post_url):
-        self.driver.get(post_url)
-        page_soup = BeautifulSoup(self.driver.page_source)
-        CollaborativeScraper.clean_images(page_soup.article)
-        return str(page_soup.article)
-
-    @staticmethod
-    def clean_images(post_soup):
-        images = post_soup.find_all('img')
-        for image in images:
-            image.attrs = {'src': CollaborativeScraper.get_image_src(image),
-                           'alt': 'Sorry Brandt screwed up this image somehow.',
-                           'class': 'img-fluid'}
-
-    @staticmethod
-    def get_image_src(img_tag):
-        """Hopefully get a valid url for the picture to use as the src"""
-        try:
-            return CollaborativeScraper.ROOT_URL + img_tag['src']
-        except:
-            return ''
 
 
 class OSAMScraper(SiteScrapper):
@@ -506,6 +507,26 @@ class OSAMScraper(SiteScrapper):
         # Empty queries will evaluate to false
         return bool(query)
 
+    @staticmethod
+    def get_title(post_soup):
+        return post_soup.h5.text
+
+    def build_post(self, post_soup):
+        """Send in the soup of a post and spit out one of my post objects"""
+        new_post = Posty()
+        new_post.date = self.get_post_date(post_soup)
+        new_post.title = self.get_title(post_soup)
+        new_post.url = self.ROOT_URL + post_soup.a['href']
+
+        # Can't find author or body from the Commentary archive page.
+        page_soup = sf.get_soup(new_post.url).find(id='divcontent')
+        new_post.author = page_soup.h1.find_next().text
+        new_post.body = str(page_soup)
+        new_post.website = self.ROOT_URL
+        new_post.name = 'OSAM'
+
+        return new_post
+
     def get_historical_posts(self):
         """Scrape all historical posts."""
 
@@ -527,25 +548,6 @@ class OSAMScraper(SiteScrapper):
 
         return posts
 
-    @staticmethod
-    def get_title(post_soup):
-        return post_soup.h5.text
-
-    def build_post(self, post_soup):
-        """Send in the soup of a post and spit out one of my post objects"""
-        new_post = Posty()
-        new_post.date = self.get_post_date(post_soup)
-        new_post.title = self.get_title(post_soup)
-        new_post.url = self.ROOT_URL + post_soup.a['href']
-
-        # Can't find author or body from the Commentary archive page.
-        page_soup = sf.get_soup(new_post.url).find(id='divcontent')
-        new_post.author = page_soup.h1.find_next().text
-        new_post.body = str(page_soup)
-        new_post.website = self.ROOT_URL
-        new_post.name = 'OSAM'
-
-        return new_post
 
 
 class AmnesiaScraper(SiteScrapper):
@@ -578,6 +580,21 @@ class AmnesiaScraper(SiteScrapper):
         # Empty queries will evaluate to false
         return bool(query)
 
+    def build_post(self, post_soup: BeautifulSoup) -> Posty:
+        """Send in the soup of a post and spit out one of my post objects"""
+        new_post = Posty()
+        new_post.url = post_soup.a['href']
+
+        page_soup = sf.get_soup(new_post.url)
+        new_post.date = page_soup.find(class_='date').text.strip()
+        new_post.title = page_soup.find(id='page-header-wrap').h1.text
+        new_post.author = 'Jamie Catherwood'
+        new_post.body = str(page_soup.find(class_='post-area'))
+        new_post.website = self.ROOT_URL
+        new_post.name = 'Amnesia'
+
+        return new_post
+
 
     def get_historical_posts(self):
         """Scrape all historical posts."""
@@ -606,21 +623,6 @@ class AmnesiaScraper(SiteScrapper):
             time.sleep(3)
 
         return posts
-
-    def build_post(self, post_soup: BeautifulSoup) -> Posty:
-        """Send in the soup of a post and spit out one of my post objects"""
-        new_post = Posty()
-        new_post.url = post_soup.a['href']
-
-        page_soup = sf.get_soup(new_post.url)
-        new_post.date = page_soup.find(class_='date').text.strip()
-        new_post.title = page_soup.find(id='page-header-wrap').h1.text
-        new_post.author = 'Jamie Catherwood'
-        new_post.body = str(page_soup.find(class_='post-area'))
-        new_post.website = self.ROOT_URL
-        new_post.name = 'Amnesia'
-
-        return new_post
 
 
 class GatesScraper(SiteScrapper):
@@ -658,6 +660,26 @@ class GatesScraper(SiteScrapper):
         # Empty queries will evaluate to false
         return bool(query)
 
+    def build_post(self, post_soup):
+        """Send in the soup of a post and spit out one of my post objects"""
+
+        new_post = Posty()
+        new_post.url = self.ROOT_URL + post_soup.a['href']
+
+        self.driver.get(new_post.url)
+        page_soup = BeautifulSoup(self.driver.page_source)
+
+        new_post.date = page_soup.find(class_='article_top_dateline').text
+        new_post.title = page_soup.find(class_='article_top_head').text
+        new_post.author = 'Bill Gates'
+
+        new_post.body = str(page_soup.find(class_='TGN_site_Articlecollumn'))
+        new_post.website = self.ROOT_URL
+        new_post.name = 'Gates Notes'
+        time.sleep(1)
+
+        return new_post
+
 
     def get_historical_posts(self):
         """Only gets the posts on the first page. More post don't appear unless you scroll down to
@@ -689,24 +711,6 @@ class GatesScraper(SiteScrapper):
 
         return posts
 
-    def build_post(self, post_soup):
-        """Send in the soup of a post and spit out one of my post objects"""
 
-        new_post = Posty()
-        new_post.url = self.ROOT_URL + post_soup.a['href']
-
-        self.driver.get(new_post.url)
-        page_soup = BeautifulSoup(self.driver.page_source)
-
-        new_post.date = page_soup.find(class_='article_top_dateline').text
-        new_post.title = page_soup.find(class_='article_top_head').text
-        new_post.author = 'Bill Gates'
-
-        new_post.body = str(page_soup.find(class_='TGN_site_Articlecollumn'))
-        new_post.website = self.ROOT_URL
-        new_post.name = 'Gates Notes'
-        time.sleep(1)
-
-        return new_post
 
 

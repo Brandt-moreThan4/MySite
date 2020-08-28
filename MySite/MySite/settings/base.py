@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.blogConfig',
     'scrapey.apps.ScrapeyConfig',
+    'api.apps.ApiConfig',
     'taggit',
     'rest_framework',
 ]

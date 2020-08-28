@@ -132,6 +132,10 @@ body {
 }
 
 .blog-logo {
-    width: 100px;
-    height: 75px;
+    width: 133px;
+    height: 100px;
+}
+
+.logo-container {
+    margin-bottom: 20px;
 }

@@ -7,19 +7,7 @@ from .scrapers import scrape_runner
 
 
 print('http://127.0.0.1:8000/blog-external/')
-# print('http://127.0.0.1:8000/blog-external/data')
-print('http://127.0.0.1:8000/blog-external/my-api')
 # scrape_runner.scrape_new_data()
-
-from rest_framework import viewsets
-
-from .serializers import PostSerializer
-
-
-class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-
 
 def post_list(request):
     """Displays the posts."""
