@@ -6,6 +6,7 @@ import time
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 from django.utils.text import slugify 
+import requests
 
 from ..scrapers import scrapefunctions as sf
 from ..models import Post
@@ -19,28 +20,24 @@ class SiteScrapper():
 
     @staticmethod
     def add_posts_to_db(posts: list):
-        for posty in posts:    
-            try:    
-                new_post = Post()
-                new_post.date = posty.date # I believe django model needs either a date or datetime object
-                new_post.title = posty.title
-                new_post.author = posty.author
-                new_post.body = posty.body
-                new_post.url = posty.url           
-                new_post.website = posty.website
-                new_post.name = posty.name
-                new_post.slug = slugify(new_post.title)
-                new_post.save()
-            except:
-                try:
-                   error_msg = (f"{datetime.datetime.now()}--Well Shit. Something screwed up when trying to " +
-                   f"add the following post to the db: \n {str(posty)}\n")
-                except:
-                    # In case there is trouble representing the post as as a string.
-                    error_msg = (f"{datetime.datetime.now()}--Well Shit. Something screwed up when trying to add posts to db")
 
-                with LOG_FILE.open('a') as f:
-                    f.write(error_msg)
+        for posty in posts:
+            # try:
+            post_dict = {'date': posty.date, 'title': posty.title, 'author': posty.author, 'body': posty.body,
+                            'url': posty.url, 'website': posty.website, 'name': posty.name, 'slug': posty.slug}
+
+            requests.post('http://127.0.0.1:8000/api/blog-external/',data=post_dict)
+            # except:
+            #     try:
+            #         error_msg = (f"{datetime.datetime.now()}--Well Shit. Something screwed up when trying to " +
+            #                      f"add the following post to the db: \n {str(posty)}\n")
+            #     except:
+            #         # In case there is trouble representing the post as as a string.
+            #         error_msg = (
+            #             f"{datetime.datetime.now()}--Well Shit. Something screwed up when trying to add posts to db")
+
+            #     with LOG_FILE.open('a') as f:
+            #         f.write(error_msg)
         
 
 class Posty:
@@ -54,9 +51,14 @@ class Posty:
     soup: BeautifulSoup
 
     @property
+    def slug(self):
+        """make a slug out of title"""
+        return slugify(self.title)
+
+    @property
     def date(self):
         return self._date
-    
+
     @date.setter
     def date(self, value):
         """Try to convert the text date to datetime, but if it does not work then just default to today's date"""
@@ -74,7 +76,6 @@ class Posty:
 
     def __str__(self):
         return f"{self.name};{self.title}"
-
 
 
 class AswathScraper(SiteScrapper):

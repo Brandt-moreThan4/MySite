@@ -46,16 +46,16 @@ def post_detail(request, year, month, day, post):
 
 
 
-def data_play(request):
-    """!!!"""
+# def data_play(request):
+#     """!!!"""
     
-    if request.method == 'POST':
-        #Depending on what button you click you will performa a different action
+#     if request.method == 'POST':
+#         #Depending on what button you click you will performa a different action
 
-        button_value = request.POST.get('Button')
+#         button_value = request.POST.get('Button')
         
-        if button_value == 'sql':            
-            data_import.import_sql()        
+#         if button_value == 'sql':            
+#             data_import.import_sql()        
             
 
-    return render(request, 'scrapey/data.html')
+#     return render(request, 'scrapey/data.html')

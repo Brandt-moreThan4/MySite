@@ -23,9 +23,6 @@ class BlogPost(PostBase):
     """Class to model a blog post. """
     
     # I do not need any specific fields for blog post. And meta ordering is taken care of in PostBase as well
-    # class Meta(PostBase.Meta):
-    #     """Sort posts by created date"""
-        
 
 
     def __str__(self):
@@ -49,10 +46,6 @@ class Book(PostBase):
     author = models.CharField(max_length=300)
     blog_display = models.BooleanField(default=False)
     cover_image = models.ImageField(default='Nothing_Yet', upload_to='book_images/')
-    
-    # class Meta:
-    #     """Sort posts by created date"""
-    #     ordering = ('-created',)
 
 
     def __str__(self):
