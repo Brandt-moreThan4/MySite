@@ -10,6 +10,7 @@ class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('post_title',)}
     date_hierarchy = 'created'
     ordering = ('updated', 'created')
+    # readonly_fields = ('highlighted',)
 
 
 

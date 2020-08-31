@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from .data import data_import
 from .models import Post
-from .scrapers import scrape_runner
+# from .scrapers import scrape_runner
 
 
 print('http://127.0.0.1:8000/blog-external/')

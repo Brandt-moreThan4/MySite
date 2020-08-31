@@ -11,15 +11,15 @@ app_name = 'api'
 # router.register(r'blog-external', views.PostViewSet, basename='blog-external')
 # router.register(r'blogposts', views.BlogPostViewSet)
 
-# urlpatterns = [
-
-    # path('', include(router.urls)),
-    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # ]
-
 urlpatterns = [
-    path('blog-posts/', views.blog_post_list)
-    # path('blog-external/<int:pk>', views.snippet_detail),
+    path('blog-list/', views.blog_list),
+    path('blog-external-list/', views.blog_external_list),
+    path('blog-external-list/most_recent', views.blog_external_most_recent)
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
+
+# urlpatterns = [
+#     path('blog-posts/', views.BlogPostList.as_view()),
+#     path('blog-posts/most_recent_post', views.BlogPostList.as_view())
+# ]
