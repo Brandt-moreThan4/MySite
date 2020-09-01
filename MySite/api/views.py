@@ -12,19 +12,35 @@ from scrapey.models import Post
 from blog.models import BlogPost
 
 print('http://127.0.0.1:8000/api/blog-external-list/')
-print('http://127.0.0.1:8000/api/blog-external-list/most_recent')
+print('http://127.0.0.1:8000/api/blog-external-list/most-recent')
 
 
 
 @api_view(['GET', 'POST'])
 def blog_external_list(request, format=None):
     """
-    List the top 10 external blog posts
+    List the top 10 external blog posts.  should update this to include the ability to filter by blog
+     name as well.
     """
+
+    
+
     if request.method == 'GET':
-        blog_external_posts = Post.objects.all()[:10]
-        serializer = PostSerializer(blog_external_posts, many=True)
-        return Response(serializer.data)
+        query_set = Post.objects.all()
+
+        # Filter by the url or title in the query string if one is given
+        if request.GET.get('url'):
+            query_set = query_set.filter(url=request.GET.get('url'))
+        elif request.GET.get('title'):
+            query_set = query_set.filter(title=request.GET.get('title'))
+        
+        if query_set:
+            # If there is something in the query set then return it in the response.
+            serializer = PostSerializer(query_set[0])
+            return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
     elif request.method == 'POST':
         serializer = PostSerializer(data=request.data)
@@ -53,9 +69,6 @@ def blog_external_most_recent(request, format=None):
         return Response(serializer.data)
 
 
-
-
-
 @api_view(['GET', 'POST'])
 def blog_list(request, format=None):
     """
@@ -72,6 +85,8 @@ def blog_list(request, format=None):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 # class PostViewSet(viewsets.ModelViewSet):
 #     # queryset = Post.objects.all()

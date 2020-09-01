@@ -14,7 +14,7 @@ app_name = 'api'
 urlpatterns = [
     path('blog-list/', views.blog_list),
     path('blog-external-list/', views.blog_external_list),
-    path('blog-external-list/most_recent', views.blog_external_most_recent)
+    path('blog-external-list/most-recent/', views.blog_external_most_recent)
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
