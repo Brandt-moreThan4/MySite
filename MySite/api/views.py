@@ -12,7 +12,6 @@ from scrapey.models import Post
 from blog.models import BlogPost
 
 print('http://127.0.0.1:8000/api/blog-external-list/')
-print('http://127.0.0.1:8000/api/blog-external-list/most-recent')
 
 
 

@@ -1,0 +1,39 @@
+{% extends "blog/base.html" %}
+
+{% block title %}FunWithBrandt-Questions{% endblock %}
+{% block styles %}
+    <style>    
+    </style>
+{% endblock %} 
+
+{% block content %}
+
+
+    <h2>Questions</h2>
+    <br />
+    <p>
+        Here is a list of questions and topics on things that either I don’t understand or on things that
+        I want to understand much better. If you can add some insight here or point me in the right direction, 
+        please hit me up : 225-907-4265.
+    </p>
+    <br>
+    <!-- <form method="get">
+        <div class="form-group">
+            <div class="input-group">
+                <input id="searchBox" type="search" class="search" name="search_box"/>
+                <button class="btn btn-secondary btn-sm">
+                    <span class="glypicon glyphicon-search"></span>Search
+                </button>
+            </div>
+        </div>
+    </form> -->
+
+        <ul>
+            {% for question in questions %}
+                <li>{{ question.question }}</li>
+            {% endfor %}
+        </ul>
+        
+
+{% endblock %}
+

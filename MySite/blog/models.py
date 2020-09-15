@@ -107,4 +107,11 @@ class Knowledge(models.Model):
             return ['Error']
 
 
+class Question(models.Model):
+    """Represents a question for my questions page"""
+    
+    question = models.TextField()
+    category = models.TextField(default='Uncategorized') 
+
+
 

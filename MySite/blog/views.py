@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import BlogPost, Book, Comment, Knowledge
+from .models import BlogPost, Book, Comment, Knowledge, Question
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
@@ -9,9 +9,10 @@ from .data import data_import, data_export
 
 
 
-# print('http://127.0.0.1:8000/admin')
+
 # print('http://127.0.0.1:8000/knowledge-repo')
 print('http://127.0.0.1:8000')
+print('http://127.0.0.1:8000/manage')
 # print('http://127.0.0.1:8000/blog')
 # print('http://127.0.0.1:8000/books')
 # print('http://127.0.0.1:8000/visuals')
@@ -153,36 +154,42 @@ def knowledge_repo(request):
     return render(request, 'blog/knowledge_repo.html', {'knowledge_list': knowledge_list})
 
 
-def data_play(request):
-    """lolol"""
-    
-    if request.method == 'POST':
-        #Depending on what button you click you will performa a different action
 
-        # First three are exporting of different data
-        if request.POST.get('Book'):            
-            data_export.export_db(Book)
-        elif request.POST.get('sql_import'):            
-            data_import.import_sql()
-        elif request.POST.get('Blog'):
-            data_export.export_db(Post)
-        elif request.POST.get('Knowledge'):
-            data_export.export_db(Knowledge)
-        elif request.POST.get('knowledge_import'):
-            data_import.import_knowledge()
-        elif request.POST.get('book_import'):
-            data_import.import_books()
-        elif request.POST.get('knowledge_update'):
-            data_import.update_knowledge()
-        elif request.POST.get('update_book'):
-            data_import.update_books()
-        elif request.POST.get('blog_update'):
-            data_import.import_blog()
+def question(request):
+    """Render the question page"""
+    questions = Question.objects.all()
+    return render(request,'blog/questions.html', context={'questions': questions})
+
+
+
+# def data_play(request):
+#     """lolol"""
+    
+#     if request.method == 'POST':
+#         #Depending on what button you click you will performa a different action
+
+#         # First three are exporting of different data
+#         if request.POST.get('Book'):            
+#             data_export.export_db(Book)
+#         elif request.POST.get('sql_import'):            
+#             data_import.import_sql()
+#         elif request.POST.get('Blog'):
+#             data_export.export_db(Post)
+#         elif request.POST.get('Knowledge'):
+#             data_export.export_db(Knowledge)
+#         elif request.POST.get('knowledge_import'):
+#             data_import.import_knowledge()
+#         elif request.POST.get('book_import'):
+#             data_import.import_books()
+#         elif request.POST.get('knowledge_update'):
+#             data_import.update_knowledge()
+#         elif request.POST.get('update_book'):
+#             data_import.update_books()
+#         elif request.POST.get('blog_update'):
+#             data_import.import_blog()
             
 
-    return render(request, 'blog/data_import.html')
-
-
+#     return render(request, 'blog/data_import.html')
 
 # def post_share(request, post_id):
 #     """Sharing a post via email. This view handles both the processing of get request and post.

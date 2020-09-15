@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Knowledge, BlogPost, Book , Comment
+from .models import Knowledge, BlogPost, Book , Comment, Question
 
 
 @admin.register(BlogPost)
@@ -38,3 +38,8 @@ class KnowledgeAdmin(admin.ModelAdmin):
     search_fields = ('tags', 'description', 'author')
     date_hierarchy = 'updated'
     ordering = ('updated', 'created')
+
+
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('question',)

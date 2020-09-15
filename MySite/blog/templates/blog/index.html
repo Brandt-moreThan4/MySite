@@ -103,6 +103,20 @@
                 sources on various topics you should head over to the <a href="{% url 'blog:knowledge_repo' %}">Knowledge Table.</a>  
             </p>
         </div>
+        <div id="explore-col" class="col-md-4">
+            <a href="{% url  'scrapey:post_list' %}"><h3>Outside Articles</h3></a> 
+            <p> If you would like to browse through an a list of external articles on various topics
+                that I've aggregated and continually update then head to the 
+                <a href="{% url  'scrapey:post_list' %}">Blog-External page</a>  
+            </p>
+        </div>
+        <div id="explore-col" class="col-md-4">
+            <a href="{% url  'blog:questions' %}"><h3>Questions</h3></a> 
+            <p>If you are would like to help me understand the world better, then check out
+               the <a href="{% url 'blog:questions' %}">Questions page to see the topics that I'm  
+               searching for answers on.</a>  
+            </p>
+        </div>        
     </div>
 
 {% endblock %}
