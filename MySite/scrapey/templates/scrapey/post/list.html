@@ -31,27 +31,39 @@
             <br>
             <div class="row">
                 <div class="col-4 col-md-3 logo-container">
-                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/Aswath.jpg" alt="Sorry, trouble with this image">
-                    <div>Aswath Damodaron's Blog</div>
+                    <a href="http://aswathdamodaran.blogspot.com">
+                        <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/Aswath.jpg" alt="Sorry, trouble with this image">
+                    </a>
+                        <div>Aswath Damodaron's Blog</div>
                 </div>
                 <div class="col-4 col-md-3 logo-container">
-                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/stratechery.png" alt="Sorry, trouble with this image">
+                    <a href="https://stratechery.com/category/articles">
+                        <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/stratechery.png" alt="Sorry, trouble with this image">
+                    </a>
                     <div>Stratechery</div>
                 </div>
                 <div class="col-4 col-md-3 logo-container">
-                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/collaborative.png" alt="Sorry, trouble with this image">
+                    <a href="https://www.collaborativefund.com/blog/archive">
+                        <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/collaborative.png" alt="Sorry, trouble with this image">
+                    </a>
                     <div>Collaborative Fund</div>
                 </div>
                 <div class="col-4 col-md-3 logo-container">
-                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/OSAM.png" alt="Sorry, trouble with this image">
+                    <a href="https://osam.com/Commentary">
+                        <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/OSAM.png" alt="Sorry, trouble with this image">
+                    </a>
                     <div>O'Shaughnessy Asset Management</div>
                 </div>
                 <div class="col-4 col-md-3 logo-container">
-                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/gates.jpg" alt="Sorry, trouble with this image">
+                    <a href="https://www.gatesnotes.com/All">
+                        <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/gates.jpg" alt="Sorry, trouble with this image">
+                    </a>
                     <div>Bill Gates Blog</div>
                 </div>
                 <div class="col-4 col-md-3 logo-container">
-                    <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/amnesia.jpg" alt="Sorry, trouble with this image">
+                    <a href="https://investoramnesia.com/category/sunday-reads">
+                        <img class="blog-logo" src="../../../static/scrapey/images/blog_logos/amnesia.jpg" alt="Sorry, trouble with this image">
+                    </a>
                     <div>Investor Amnesia</div>
                 </div>
 
@@ -72,8 +84,12 @@
                         </div>
                         <div class="col">
                             <h4>
-                                <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                <a class="blog-title" href="{{ post.url }}">{{ post.title }}</a>
                             </h4>
+<!-- 
+                            <h4>
+                                <a class="blog-title" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                            </h4> -->
 
                             <p>
                                 <span class="date">Created on {{ post.date|date:"DATE_FORMAT" }}</span>
